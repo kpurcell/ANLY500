@@ -1,0 +1,63 @@
+---
+title: 'Analytics I: Principles and Applications'
+subtitle: "ANLY 500 -- Fall 2015"
+
+output: pdf_document
+---
+
+******
+**Instructor:** [Kevin Purcell](http://kevin-purcell.com) 
+
+**Office Location:** Corporate Faculty offices??
+
+**Office Hours:**  Mon + Fri 8-10
+
+**Contact:** ANLY500@kevin-purcell.com 
+
+**Locations:** Room 1302
+
+**Dates & Times:** September 5; October 17; December 5 -- 8-12pm
+
+## Course Description:
+This course covers the core concepts and applications of analytics in different domains. The student is introduced to the main concepts and tools of analytics (e.g., data querying and reporting, data access and management, data cleaning, statistical programming, data mining introduction, relational databases, and statistical analysis of databases). The student is also introduced to the emerging topics in data sciences such as Big Data, Smart (Semantic) Data, data modeling, and data visualization. The student then applies the principles of analytics/data sciences to different domains such as health, education, public safety, public welfare, transportation, and other public and private sectors. The student is then encouraged to apply the concepts to a domain of interest. 
+
+**Prerequisites:** Baccalaureate degree and MATH 220 and 280.
+
+**Corequisites:** MATH 510 or demonstrated competency in mathematics, statistics, and applied statistics at the discretion of the advisor.
+
+## Required Texts: 
+There is **no required** textbook.  We will leverage open-source texts and open-access literature to the greatest extent possible.
+
+## Suggested Texts:
+- "R in a nutshell", J. Adler, 2012, $39 new, ~$17 used
+- 
+
+## Open-source resources:
+- Journal of Statistical Software: http://www.jstatsoft.org/
+- Google style guide for R: http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml 
+- Hadley Wickham style guide for R: http://adv-r.had.co.nz/Style.html
+- R cheat sheet: http://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
+- R vocabulary list: http://adv-r.had.co.nz/Vocabulary.html
+
+## Course Plan:
+1. Data analytics overview, R programming, data management
+2. 
+
+
+## Grading
+Grading policy will follow university standards published on page 42 of the [University Handbook](http://harrisburgu.edu/lib/pdf/MSanalytics_program.pdf).
+
+## Attendance Policy
+Student performance is inversely correlated with absenteeism. ([Marburger 2010](http://www.tandfonline.com/doi/abs/10.3200/JECE.37.2.148-155#.Vem6qp3BzGd))
+
+This course will have no requirement for attendance however, missed in-class assingments will not be offered without a university accepted excuse.
+
+
+
+
+
+
+
+
+
+
