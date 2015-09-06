@@ -33,7 +33,7 @@ There is **no required** textbook.  We will leverage open-source texts and open-
 - 
 
 ## Open-source resources:
-- Journal of Statistical Software: http://www.jstatsoft.org/
+- Journal of Statistical Software: http://www.jstatsoft.org/ 
 - Google style guide for R: http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml 
 - Hadley Wickham style guide for R: http://adv-r.had.co.nz/Style.html
 - R cheat sheet: http://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
