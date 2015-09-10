@@ -9,6 +9,9 @@ output:
         theme: sky
         center: true
         self_contained: true
+        highlights: kate
+        transition: default
+   
 ---
 
 
@@ -175,9 +178,10 @@ My [info](http://kevin-purcell.com)
 - Now most popular *free software license* [*](https://en.wikipedia.org/wiki/Free_software_license)
 - OSS = Big user community = easier to learn
 
-## Why R?
+## Why R? {.smaller}
 
 ![Rvalue](https://dl.dropboxusercontent.com/u/62107122/r-value.png)
+
 - Ranked by Venture Beat as on of the skills worth >$110,000 
 
 
