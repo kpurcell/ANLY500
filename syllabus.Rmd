@@ -30,9 +30,9 @@ This course covers the core concepts and applications of analytics in different 
 There is **no required** textbook.  We will leverage open-source texts and open-access literature to the greatest extent possible.
 
 ## Suggested Texts:
-- Joseph Adler. R in a nutshell, O'Reilly. 2012, $39 new, ~$17 used
-- Alain F. Zuur, et al. A Beginner’s Guide to R. Use R. Springer, 2009. ISBN: 978-0-
-387-93836-3.
+- Joseph Adler. R in a nutshell, O'Reilly. 2012, [$39 new](http://www.amazon.com/R-Nutshell-In-OReilly/dp/144931208X), ~$17 used
+- Alain F. Zuur, et al. A Beginner’s Guide to R. Use R. Springer, 2009. [ISBN: 978-0-
+387-93836-3](http://www.springer.com/us/book/9780387938363).
 
 ## Open-source resources:
 - Journal of Statistical Software: http://www.jstatsoft.org/ 
