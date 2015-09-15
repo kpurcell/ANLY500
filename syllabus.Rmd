@@ -16,7 +16,7 @@ output: pdf_document
 
 **Locations:** Room 1302
 
-**Dates & Times:** (Physical in-class) September 5; October 17; December 5 -- 8-12pm
+**Dates & Times:** (Physical in-class) September 5; October 17, and December 12 -- 8-12pm
 Weekly on-line: Wed at 7 pm ET.
 
 ## Course Description:
