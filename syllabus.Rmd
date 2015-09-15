@@ -16,7 +16,8 @@ output: pdf_document
 
 **Locations:** Room 1302
 
-**Dates & Times:** September 5; October 17; December 5 -- 8-12pm
+**Dates & Times:** (Physical in-class) September 5; October 17; December 5 -- 8-12pm
+Weekly on-line: Wed at 7 pm ET.
 
 ## Course Description:
 This course covers the core concepts and applications of analytics in different domains. The student is introduced to the main concepts and tools of analytics (e.g., data querying and reporting, data access and management, data cleaning, statistical programming, data mining introduction, relational databases, and statistical analysis of databases). The student is also introduced to the emerging topics in data sciences such as Big Data, Smart (Semantic) Data, data modeling, and data visualization. The student then applies the principles of analytics/data sciences to different domains such as health, education, public safety, public welfare, transportation, and other public and private sectors. The student is then encouraged to apply the concepts to a domain of interest. 
@@ -29,8 +30,9 @@ This course covers the core concepts and applications of analytics in different 
 There is **no required** textbook.  We will leverage open-source texts and open-access literature to the greatest extent possible.
 
 ## Suggested Texts:
-- "R in a nutshell", J. Adler, 2012, $39 new, ~$17 used
-- 
+- Joseph Adler. R in a nutshell, O'Reilly. 2012, $39 new, ~$17 used
+- Alain F. Zuur, et al. A Beginner’s Guide to R. Use R. Springer, 2009. ISBN: 978-0-
+387-93836-3.
 
 ## Open-source resources:
 - Journal of Statistical Software: http://www.jstatsoft.org/ 
@@ -40,8 +42,8 @@ There is **no required** textbook.  We will leverage open-source texts and open-
 - R vocabulary list: http://adv-r.had.co.nz/Vocabulary.html
 
 ## Course Plan:
-1. Data analytics overview, R programming, data management
-2. 
+1. Data analytics overview, R programming, data management/handling
+2. Data story-telling
 
 
 ## Grading
