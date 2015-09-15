@@ -1,0 +1,97 @@
+---
+title: "Lecture 2 - Extending R"
+author: "KM Purcell"
+date: "September 14, 2015"
+output: 
+   revealjs::revealjs_presentation:
+        theme: sky
+        center: true
+        self_contained: true
+---
+
+# Review
+
+---
+
+## Last class
+
+- Built-in functions
+- Assingment operator `<-`
+- object naming conventions
+- vectors
+- basic arithmatic operations
+- statistical test output (*from a fxn*)
+- simple plotting functions and potential
+
+
+## 
+
+![woutData](https://pbs.twimg.com/media/CO485g4WEAAr2Mm.png)
+
+
+## Other business
+
+- the **syllabus** is posted to Moodle
+- 
+
+
+
+## R resources
+
+- book list on CRAN (https://www.r-project.org/doc/bib/R-books.html)
+
+
+
+# Analytics Toolbox
+
+---
+
+## Data Science (Again!)
+
+![dataSci](https://tarekamr.appspot.com/img/datas_venn2.png)
+
+
+## 
+
+```{r pie, echo=TRUE}
+
+slices <- c(80, 10,5,5)
+lbls <- c("Munging", "EDA", "Modeling", "Reporting")
+pie(slices, labels = lbls, main="What is 'Munging'")
+```
+
+## Data munging
+
+
+```{r munging, echo=FALSE, fig.height=5, fig.width=5}
+
+slices <- c(20,20,20,20,20)
+lbls <- c("import", "formatting", "integration", "summary", "visualization")
+pie(slices, labels = lbls, main="What is 'Munging'")
+```
+
+## Data munging
+
+- The process by which an analyist collects, organizes and maps data for downstream analysis.  
+- Definitions vary, some include EDA in munging.
+- Overall, I deliniate **munging** as the tasks that must be undertake in order to work with the relevant data.
+- Important goal is to automate to the greatest extent possible (crucial for all phases of analytical work)
+- Hence, `R` or other programitic approaches
+
+## Munging challanges
+
+- **import** challanges of importing data from disparate databases and legacy formats
+- **formatting** converting data to approapriate formats, converting vectors to be recognized as dates, or categorical variables, or spatial coordinates, etc.
+- **integration** often data will be stored/collected differently, ie. different spatio-temporal resolutions that require integration.
+- **summary** what is missing? Is there a data dictionary? How was it collected?
+- **visualiation** does the data make sense?  Often require visual inspections.  Big challange as data sets explode in size!
+
+
+## A Deepe `R` dive
+
+
+
+
+
+
+
