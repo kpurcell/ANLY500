@@ -13,3 +13,5 @@ vignettes/*.pdf
 *.html
 Lecture1.html
 syllabus.pdf
+*.doc
+
