@@ -1,0 +1,102 @@
+---
+title: "Lecture 3 - XXXXXX"
+author: "KM Purcell"
+date: "September 30, 2015"
+output: 
+  revealjs::revealjs_presentation:
+     theme: serif
+     center: true
+     self_contained: true
+     highlight: default
+---
+
+
+## This week
+
+- First R assignment
+- Methods Text Ch. 1 & 2
+- Wilson et al. 2014
+
+
+
+# Science & Research
+
+---
+
+
+## What is science?
+
+- big question, lots of answers
+- defined according to Bhattacherjee as:
+ + contributes to body of science
+ + follows scientific method
+- assuming a familiarity w/scientific method if not [review](https://en.wikipedia.org/wiki/Scientific_method)
+
+## Types of Science
+
+- The word **Science** derives from the Latin *scientia* meaning knowledge
+- Knowledge is diverse -> so is science
+- Differences between natural sciences and social sciences?
+
+## Natural vs. Social sciences
+
+- natural sciences tend to be precise, accurate, deterministic
+- social sciences tend to lack precision, are less deterministic and more ambiguous.
+
+
+## Basic vs Applied
+
+- Basic sciences (pure sciences) explain essential physical, chemical, and biological forces.
+- Applied sciences study applications of the laws, theories, and results of the basic sciences.
+- Overly, simplistic dichotomy!
+
+
+## [Pasteur's quadrant](https://en.wikipedia.org/wiki/Pasteur%27s_quadrant)
+
+![quadrant](http://timkastelle.org/wp-content/uploads/2013/05/pasteurs-quadrant.jpg)
+
+
+## Operational Goal of Science
+
+- discover laws
+- postulate theories
+- explain natual and social phenomena
+- expand scientific knowledge
+
+## 
+
+> "Somtimes there may not be a single universal truth, but rather an equilibrium of  "multiple truths"". 
+
+## The equilibrium of "multiple truths"
+
+- This is an esoteric concept
+- There is a continum of knowledge in science.  
+- Theories are being created and destroyed, improved and dispelled.
+- Therefore the progress of science is defined by a progression of improvement marked by experimentation and logical reasoning.
+
+## Inductive vs Deductive research
+
+- **Inductive** - goal of inferring theory from observed data
+- **Deductive** - goal of testing theory using experimental data
+- Difference is *theory-building*(inductive) & *theory-testing*(deductive)
+- In reality they are quite often mixed
+
+## Experience is the teacher
+
+- The cycle of research (Fig 1.1, pg 4) is essential to the progression of science
+- Both *theory-building* and *theory-testing* are crucial to advancement
+- Example: Karl Marx's theory of communism
+
+## 
+
+
+
+
+
+
+
+
+
+
+
+
