@@ -34,7 +34,7 @@ The objective of this assignmenet is two-fold.  First, I want you to familiarize
 
 ## Directions
 
-Below is a document with a number of questions focused on either `R` information or on `R` code.  To complete these questions create **code chunks** that provide a response to code based questions.  Full completion of this assignment requies the submission of a completed `.rmd' file and a word document created using knitr that displays my text and your responses.  
+Below are a number of questions focused on either `R` information or on `R` code.  To complete these questions create **code chunks** that provide a response to code based questions.  Full completion of this assignment requies the submission of a completed `.rmd' file and a word document created using knitr that displays my text and your responses.  Do not forget to ammend the **YAML** code at the top of the document with your name and the data of the assignment.
 
 
 ## Questions
