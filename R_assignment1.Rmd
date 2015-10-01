@@ -42,9 +42,6 @@ Below is a document with a number of questions focused on either `R` information
 1.) Write a code chunk that produces a pie chart showing the proportion of time you spent reading class materials versus experimenting with R code since this class began.
 
 
-**Delete this and put your code chunk here**
-
-
 
 2.) Write a code chunk that randomly generates two vectors (A,B) from a normal distribution both of which consist of 5000 random data points, with a mean = 400 and a standard deviation = 50.  Now verify these two vectors are identical by calculating the median of both.  
 
