@@ -8,6 +8,7 @@ output:
      center: true
      self_contained: true
      highlight: default
+     footer: "Copyright (c) 2015, WildFig"
 ---
 
 
