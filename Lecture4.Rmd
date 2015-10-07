@@ -1,0 +1,366 @@
+---
+title: 'Lecture 4: Descriptive Statistics and Data Visualization (EDA)'
+author: "KM Purcell"
+date: "October 2, 2015"
+output: 
+  revealjs::revealjs_presentation:
+     theme: serif
+     center: true
+     self_contained: true
+     highlight: default
+     footer: "Copyright (c) 2015, WildFig"
+---
+
+## This Week
+
+- Additional readings on Moodle: Tidy Data, 10 Simple Rules
+- First discussion forum posted (Ch. 1 Methods)
+- Project Discussion
+- Chapter 3 Methods
+- Data manipulation
+
+
+# Term Projects
+
+
+## Project objectives
+
+- Apply what you are learning in ANLY 500.
+- A professional application
+- Involve the entire research process
+
+## Project Deliverables
+
+- Project Proposal (Oct 17)
+- Project Analysis (Nov 25)
+- Project Presentation (Dec 5)
+
+
+## Project Proposal
+
+- Based on Ch. 3 of Methods Text
+- 2-page proposal
+- I will distribute a proposal template
+- Should outline 3 phases of research
+
+## Questions?
+
+
+
+# Ch. 3: The Research Process
+
+
+## Paradigms of Research
+
+- **Paradigm** a belief system, mental model, or frame of reference
+- popularized by **Thomas Kuhn** in *The Structure of Scientific Theory*
+
+![book](http://cs.lmu.edu/~ray/images/kuhn.jpg)
+
+
+## Why are they important?
+
+- differing preceptions
+- Defines how to evaluate a question
+- Therefore, how an analysis is interpreted
+
+## Popular Paradigms
+
+- **Positivism** - derives from Auguste Comte (1789-1857)
+- Science (knowledge creation) should be restricted to what can be observed & measured
+- Positivism lead to Empiricism (blind faith in observable facts)
+
+- **Post-positivism** - mid-20^th^ century. Argues for combining empirical observation and logical reasoning
+- Science is not certain, but probabilistic
+
+
+## What lead to Post-positivism
+
+- Inability to quantify some variables (human thought/emotion)
+
+## Subjective vs Objective
+
+- **Objective** research pulls the researchers opinions and evaluations out of the work and relied strictly on observable, quantifiable information
+- **Subjective** research allows for researcher interpretation, such as in interviews, and surveys (more common in social science than in natural scieneces)
+
+
+## 
+
+![fig3-1](https://dl.dropboxusercontent.com/u/62107122/Screen%20Shot%202015-10-07%20at%2012.40.24%20PM.png)
+
+
+## Functionalist Paradigm
+
+- most research in social & natual sciences lies in this area
+- Analytics and segmented sales data vs NLP and product review comments
+
+## Research Process
+
+- Observation - observe social & natural phenomena
+- Rationalization - make sense of observed phenomena
+- Validation - test our theories with scientific method
+
+
+##
+
+> Most traditional research tends to be deductive and functionalistic in nature
+
+## Three phases of research
+
+- Exploration
+- Research Design
+- Research Execution
+
+## Exploration
+
+- selecting research questions
+- literature review (id theory, existing work)
+
+
+## Research Design
+
+- creating research methods
+- **Operationalization** - designing measures for research constructs
+- Methods - survey, experiment or combo.
+- Sampling strategy - how to measure the population with a sample
+
+
+## Research Proposal
+
+- not a phase as an outcome
+- Details the outcome of the Exploration and Design phases
+
+## Research Execution
+
+- Pilot test - a small scale operationally similar methods test that evaluates the research proposal
+- Data analysis - After full experiment or data collection the analysis process begins.
+
+## Resarch Report
+
+- Again not a phase as much as an output
+- But a crucial part of the research cycle
+- Something very familiar to analytics students
+
+
+## Questions?
+
+
+# Data Manipulation with R
+
+
+## Working with Data
+
+- we have reviewed how to get your data into `R`
+- Today we will learn how to handle data in `R` 
+
+```{r}
+# Lets find out whats loaded in my session
+search()
+```
+
+- look at `packages:datasets`
+
+
+## datasets package
+
+- The `datasets` package offers lots of generic data
+- a full list can be obtained by 
+```
+data()
+```
+- For more info use 
+```
+help("datasets")
+```
+- This is where you go (https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html)
+
+## Data orientation
+
+- We will start with the `mtcars` data again
+- Most datasets you interact with you will **not** have collected
+- You will need to get familiar with its structure
+
+## 
+- What are column headers
+
+```{r}
+# What are the vectors or column headers in mtcars
+names(mtcars)
+```
+
+## 
+- look at the top
+```{r}
+head(mtcars)
+```
+
+- look at the bottom of the data 
+```{r}
+tail(mtcars)
+```
+
+## 
+- what is the structure 
+```{r}
+str(mtcars)
+```
+
+##
+- what are the dimensions
+```{r}
+dim(mtcars)
+```
+
+
+## Data summaries
+
+- often it is valuable to summarize data
+- Utilitiy of summaries are positively correlated w/ data size
+- Patterns are **impossible** to detect visually with large data
+
+##
+```{r}
+# Summary of dataset
+summary(mtcars)
+
+# Summary of variable
+summary(mtcars$carb)
+```
+
+
+## Bracket Notation
+
+- syntax for indexing or referencing specific data in `R`
+- We have already introduced this concept in earlier lectures
+- now we will apply `[row,column]` or **Bracket notation** for subsetting and exploring data
+
+## Viewing data by index
+```{r}
+# View the first row of data
+mtcars[1,]
+
+# A couple of rows
+mtcars[4:10,]
+
+# Value in first row only first column
+mtcars[1,1]
+```
+
+
+
+
+##
+```{r}
+# What are the third to fifth variables in mtcars
+names(mtcars)
+# Summary of subset of mtcars
+summary(mtcars[3:5])
+```
+
+## Filtering data
+
+- bracket notation is also powerful for **filtering** data
+```{r}
+# View data on cars with 6 cylinders
+ mtcars[mtcars$cyl=="6",]
+```
+
+
+## Sorting data
+```{r}
+# sort by mpg
+mtcars[order(mtcars$mpg),]
+```
+
+## Sorting data
+```{r}
+# sort by mpg and cyl
+mtcars[order(mtcars$mpg, mtcars$cyl),]
+```
+
+## Sorting data
+```{r}
+#sort by mpg (ascending) and cyl (descending)
+mtcars[order(mtcars$mpg, -mtcars$cyl),] 
+```
+
+
+## Package Hmisc
+
+- A nice package for data analysis
+- include lots of useful utility functions
+##
+```{r, message=FALSE}
+# Load Hmisc
+library(Hmisc)
+# Use describe() function
+describe(mtcars[1])  # using bracket notation
+describe(mtcars$mpg) # direct variable reference
+```
+
+
+##
+```{r, message=FALSE}
+library(fBasics) # Load package
+basicStats(mtcars[3:5])
+```
+
+
+## Cross Tabulation
+- tool for comparison between categorical variables
+- AKA: Contingency Tables
+- For mtcars, we are treating two `num` as categoricals
+
+##
+```{r}
+# Find levels
+unique(mtcars$gear)
+unique(mtcars$cyl)
+
+# Show counts by contingency
+table(mtcars$gear, mtcars$cyl)
+```
+
+##
+```{r}
+library(gmodels)  # Offers tools for model fitting
+CrossTable(mtcars$gear, mtcars$cyl, 
+           prop.t=TRUE, # include table of proportions
+           prop.r=TRUE, # include row proportions
+           prop.c=TRUE) # include column proportions
+```
+
+
+## Viewing Data
+- Often there is not replacement for viewing data
+- Exploratory Data Analysis (EDA)
+- `R` offers easier, faster EDA than any alternative
+- Highly repeatable in comparison to GUI options which are not repeatable at all
+
+
+## 
+```{r, fig.height=6, fig.width=6}
+# Pairs plot in base graphics
+pairs(mtcars[3:5])
+```
+
+
+
+## 
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=6}
+# Scatterplot Matrices from the car Package
+library(car)
+scatterplotMatrix(~mpg+disp+drat+wt|cyl, data=mtcars,
+  	main="Three Cylinder Options")
+```
+
+
+## Next Class
+
+- Further develop our EDA abilities 
+- Discuss the readings on data management
+- Discuss readings on data visualization
+- Introduce the `ggplot2()` package
+- R assignment will be done in-class, while I discuss research proposals
+
+
