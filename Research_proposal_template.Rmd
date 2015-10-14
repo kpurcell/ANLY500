@@ -1,0 +1,40 @@
+---
+title: "Research Proposal Template"
+author: "Your Name"
+date: "October 14, 2015"
+output: pdf_document
+fontsize: 11pt
+geometry: margin=1in
+bibliography: ANLY500.bib
+csl: plos-computational-biology.csl
+---
+
+
+# Introduction
+This section should include background and context for the question you seek to answer.  Generally an introduction provides the reader with an introduction to the topic by reviewing existing literature concerning the question. In the final paragraph of the introduction clearly state your research question.
+
+The objective of this exercise is not to force you to write a long proposal but to spend time deeply considering your methods and research operations.  By requiring you to put these thoughts into a proposal format you will have to consider the steps and it will reinforce or find flaws in your proposed methods.  Therefore the length requiremenet for this assignment is no less than two-pages.  The primary focus of this assignment should be on 
+
+Finally, it is possible to have your citations formated and integrated into your Rmarkdown documents automatically using feature of knitr.  The following sentences display examples and [read](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) the centent on the Rmarkdown webpage for more details.  So you were say something important that you got from a research source and cite it like this [@wickham_tourr_2011].  If you had something with two references you would do it like this [@wickham_tidy_2014; @grolemund_dates_2011].  The bibliography format will follow the PLoS Computational Biology format and I will upload a files with the definitions.  
+
+# Methods
+In this section you should layout how you plan to address your question.  Introduce the data sets you plan to use.  Detail where they will come from, if you currently have access to the data or how you plan to.  If you are using additional open source data include where they come from and how they will be obtained.  
+
+Additionally, you should detail what analyses you plan to use to address the question.  (Remember that your introduction should include examples of the application of these methods).
+
+# Timeline
+
+Obviously, you do  not have the experience necessary to truely project how long these things will take.  However, in a professional setting that is the first question you will be asked.  So for our purposes try to make an educated guess based on what you think is necessary.  Then track the time you spend on the project.  In real world scenarios the only way you can answer that question is through experience, this will be your first experience if you track your time you will be able to assess where you under or overestimated and you will therebye improve your next estimate.  
+
+# Deliverables
+
+This should be a list of products or outputs from your project.  It should look like this:
+
+1. **research report**, detailing the methods and outcome of the analysis. (Another template will be provide for this activity as well)
+2. A **presentation** that will highlight the methods and top level results of your study.  This will be presented to the class during your final session.  
+3. Additional outputs that may be of use to you professionally or to the organization that you work for could also be listed.
+
+# References
+References should be provided for all literature sources used in the proposal.  While both peer-reviewed and gray literature will be accepted the validity of your sources is paramount to your study and its interpretation.  
+
+Directions for
