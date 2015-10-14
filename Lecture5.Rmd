@@ -1,0 +1,78 @@
+---
+title: "Lecture 5"
+author: "KM Purcell"
+date: "October 13, 2015"
+output: ioslides_presentation
+---
+
+## Previously
+- indexing data
+- filtering data frames
+- sorting data frames
+- producing data summaries
+- contingency tables (cross tabulations)
+
+## Objectives
+- Conclude descriptive statistics
+- Descriptive statistics
+- Data visualization tools
+
+## Continue descriptive statistics tools
+
+## Descriptive statistics by groups
+
+## Dependence vs Correlation
+- tests of independence
+
+
+## Chi square test
+
+```{r, warning=FALSE}
+mytable <- xtabs(~cyl+gear, data=mtcars)  #cross tabulate data
+mytable  #View data
+chisq.test(mytable) #evalute independence
+```
+
+
+
+## Correlation
+
+
+
+# Descriptive Statistics
+
+
+
+
+## `iris` dataset
+
+- Today we are using a new dataset
+- `iris` data is a data frame with 150 cases (rows) & 5 variables (columns) 
+- Variables are Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, and Species.
+- Data derived from Anderson but popularized by **RA Fisher**
+- Who is Fisher?
+
+## Visualizing with `base`
+
+- There a number of packages in `R` that facilitate the graphical display of data.
+- `base` graphics come standard with all `R` installations
+- `ggplot2` and `lattice` are two additional but standard packages
+
+## Getting to know `iris`
+```{r}
+# New data set 
+str(iris)
+
+# Names
+names(iris)
+```
+
+## Getting to know `iris`
+
+```{r}
+summary(iris)
+```
+
+
+
+
