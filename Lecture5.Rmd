@@ -13,13 +13,159 @@ output: ioslides_presentation
 - contingency tables (cross tabulations)
 
 ## Objectives
+- Review reading
 - Conclude descriptive statistics
-- Descriptive statistics
 - Data visualization tools
 
-## Continue descriptive statistics tools
+# Review Reading
+
+
+## Hadley Wickham {.flexbox .vcenter}
+<div class="columns-2">
+- Hadley Wickham
+- created ggplot2, reshape, ddplyr, etc
+- Professor of Statistics at Rice University
+- Member of the Rstudio team
+
+![had](http://pix-media.s3.amazonaws.com/blog/1001/HadleyObama2.png)
+</div>
+
+
+## Tidy Data
+
+- 80% of an analysts time = Cleaning data
+- What does clean data look like?
+- How must data be formated to expedite analysis?
+- What tools can be used to go from **messy** to **tidy**
+
+## Tidy Data
+
+- Principles of tidy data derive from (Codd 1990)[pdf](http://courses.arch.ntua.gr/fsr/113702/Codd-RDBMS-Book.pdf)
+- Tidy data is data ready for analysis
+- Attempts to create a common framework, a "philosopy of data"
+- The foundation of `plyr` and `ggplot2`
+
+## {.flexbox .vcenter}
+
+>"Tidy datasets provide a standardized way to link the structure of a dataset (its physical layout) with its semantics(its meaning)"
+
+## Data semantics
+
+- A dataset is a collection of **values**
+- These **values** can be numbers or string of text
+- **Values** are organized in two ways: **variables** and **observations**
+- **Variables** measure the same underlying unit (like height, temp)
+- **Observations** measure are all on the same unit (person, data, race)
+- That is why data measuring different units is held in different tables
+- This compares to "units of study"
+
+## In tidy data
+
+1. Each variable forms a column
+2. Each observation forms a row
+3. Each type of observational unit forms a table
+
+## Solutions for messy data
+
+- melting
+- casting
+- splitting
+- We will look at these tools in the `R` environment in more detail
+
+## 10 Simple Rules for Better Figures
+
+- This is about **scientific visualization**, which differs from your own EDA
+- However, when evaluating data for analysis careful consideration is required to ensure you are viewing the data in the proper perspective.
+- Analysts conduct complex analysis & synthesize results into textual and graphical output
+- Greatest focus will be on visual output
+- Attention spans are **very** short
+
+## Rules
+
+- **Know your audience** - for you certain aspects less important, for your a CEO brevity, etc
+- **Identify your message** - Data can be viewed countless ways an analysts job is to use the format that best conveys the data's message
+- **Adapt figure to support medium** - output format will dictate many production features
+- **Captions are not optional** - while some variability exists in presentations a figure without a caption in a text report or paper is grounds for rejection
+
+## Rules
+
+- **Do not trust defaults** - most ploting or graphical software has default settings.  These almost always must be modified for publication quality figures
+- **Use color effectively** - consider color as important as your plot choice.  If the color does not enrich understanding that it may not be necessary.
+- **Do not mislead reader** - objectivity is essential for a data analyst.  A bias or preceived bias on the part of the analyst will compromise the entire study.
+
+## Rules
+
+- **Avoid chartjunk** - Figures and data visualizations are complicated and often difficult to interpret anything that does not seek to clarify the data message should not be included.
+- **Message trumps beauty** - often a problem with visuals developed by "frontend" designers as opposed to analyst.  This may differ based on your output.  If you are developing a client-facing dashboard for a product, beauty may be mission critical.
+- **Get the right tool** - Data visuals can be made with a number of tools, the right one is the best choice for your problem.  I teach `R` because it has the most robust graphical options for a statistical software tool.  
+
+
+## Rules Wrap-up
+
+- These rules will not be appropriate for figure you make but a valuable set of rules to keep in mind.
+- Questions?
+
+# Conclude Data summation and Descriptive Statistics
+
+## Descriptive Statistics
+
+- the process of describing a data set or collection of information
+- **Descriptive statistics** is aimed at summarizing the features of a *sample*
+- By contrast **inferential statistics** seeks to use a *sample* to make inferences about the population from which they derive.
+- **Descriptive stats** commonly contain measures of *central tendency* and *dispersion*
+
+## Central tendency
+
+- a measure of the center of a sample distribution
+- mean (many variants), median, mode, midrange
+
+## Dispersion 
+
+- measures the *distribution* (variability, scatter, spread) of a statistical sample around its center
+- typical measures are: variance, standard deviation, interquartile range
+- Dimesionless measures: coefficient of variation, relative mean difference, Gini coefficient
+
+## 
+
+```{r, warning=FALSE, message=FALSE}
+library(pastecs) # powerful descriptive function
+myvars <- c("mpg", "hp", "wt") # just subset mtcars
+stat.desc(mtcars[myvars])
+```
+
+
+## 
+```{r, echo=FALSE,warning=FALSE, message=FALSE}
+library(pastecs) # powerful descriptive function
+myvars <- c("mpg", "hp", "wt") # just subset mtcars
+stat.desc(mtcars[myvars], norm=T)
+```
+
+## pastecs package benefits
+```{r}
+library(pastecs); myvars <- c("mpg", "hp", "wt")
+dat <- stat.desc(mtcars[myvars], norm=T) # If you dump your output to an object
+str(dat)
+dat$mpg[1]  # you can reference specific statistics later
+```
+
 
 ## Descriptive statistics by groups
+```{r}
+myvars <- c("mpg", "hp", "wt")
+# without naming groups
+aggregate(mtcars[myvars], by=list(mtcars$am), mean) 
+# specifying am for groups
+aggregate(mtcars[myvars], by=list(am=mtcars$am), mean) 
+```
+
+## Descriptive statistics by groups
+```{r, warning=FALSE, message=FALSE}
+library(doBy) # The doBy package offers groupwise statistics
+summaryBy(mpg+hp+wt~am, data=mtcars, FUN=c(mean,sd))
+
+```
+- The formula nature of this function allows for many variations on the summary call
 
 ## Dependence vs Correlation
 - tests of independence
@@ -30,27 +176,59 @@ output: ioslides_presentation
 ```{r, warning=FALSE}
 mytable <- xtabs(~cyl+gear, data=mtcars)  #cross tabulate data
 mytable  #View data
-chisq.test(mytable) #evalute independence
+chisq.test(mytable) #evalute independence; null = independent
 ```
 
+## [Correlation](http://www.statmethods.net/stats/correlations.html)
+- **correlation coefficients** are a tool for describing the relationship between quantiative variables
+- Correlations can be *positive* or *negative*
+- Types of correlation coefficients: `R` calculates: Pearson, Spearman, Kendall, partial, plus others.
 
+## [`state.x77`](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/state.html) Data Set
+```{r}
+# We will use the state.x77 data set
+# Contains data on populations, income, illiteracy rates, etc...
+head(state.x77)
+```
 
-## Correlation
+##
+```{r}
+states <- state.x77[,1:6] # Keep the first 6 variables
+cov(states)
+```
 
+##
+```{r}
+states <- state.x77[,1:6] # Keep the first 6 variables
+library(corrgram) #package for visualizing correlation matrices
+corrgram(states, lower.panel=panel.pts,
+         upper.panel=panel.pie, text.panel=panel.txt)
+```
 
+# Exploratory Data Visualization (EDA)
 
-# Descriptive Statistics
+## [EDA](https://en.wikipedia.org/wiki/Exploratory_data_analysis)
+<div class="columns-2">
+- analyzing data sets for summary understanding using visual means
+- Advanced by John Tukey
+- Meant to push beyond hypothesis testing
 
+![eda](http://blogs.sas.com/content/jmp/files/2013/08/EDA-book2.png)
+</div>
 
+## EDA objectives
 
+- Identify hypotheses pertaining to observed phenomena
+- Verify data conforms to inferential assumptions 
+- Drive the selection of statistical methodologies
+- Informs subsequent statistical operations
 
-## `iris` dataset
-
-- Today we are using a new dataset
-- `iris` data is a data frame with 150 cases (rows) & 5 variables (columns) 
-- Variables are Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, and Species.
-- Data derived from Anderson but popularized by **RA Fisher**
-- Who is Fisher?
+## Tools of EDA
+- Box plot
+- Histogram
+- Scatter plot
+- Stem-and-leaf plot
+- Dot plot
 
 ## Visualizing with `base`
 
@@ -58,21 +236,36 @@ chisq.test(mytable) #evalute independence
 - `base` graphics come standard with all `R` installations
 - `ggplot2` and `lattice` are two additional but standard packages
 
-## Getting to know `iris`
-```{r}
-# New data set 
-str(iris)
 
-# Names
-names(iris)
+## Histograms
+```{r}
+hist(mtcars$mpg)
 ```
 
-## Getting to know `iris`
-
+## Histograms 
 ```{r}
-summary(iris)
+# Colored Histogram with Different Number of Bins
+hist(mtcars$mpg, breaks=12, col="red")
+```
+
+## Histograms
+```{r, fig.height=3, fig.width=3}
+# Add a Normal Curve (Thanks to Peter Dalgaard)
+x <- mtcars$mpg 
+h<-hist(x, breaks=10, col="red", xlab="Miles Per Gallon", 
+  	main="Histogram with Normal Curve") 
+xfit<-seq(min(x),max(x),length=40) 
+yfit<-dnorm(xfit,mean=mean(x),sd=sd(x)) 
+yfit <- yfit*diff(h$mids[1:2])*length(x) 
+lines(xfit, yfit, col="blue", lwd=2)
 ```
 
 
+
+## Boxplots
+
+## QQ Plots
+
+## Dot plots
 
 
