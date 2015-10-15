@@ -37,4 +37,3 @@ This should be a list of products or outputs from your project.  It should look 
 # References
 References should be provided for all literature sources used in the proposal.  While both peer-reviewed and gray literature will be accepted the validity of your sources is paramount to your study and its interpretation.  
 
-Directions for
