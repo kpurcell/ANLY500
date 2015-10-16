@@ -1,0 +1,117 @@
+---
+title: "Lecture 6 - Exploratory Data Analysis"
+date: "October 17, 2015"
+output: 
+  revealjs::revealjs_presentation:
+     theme: serif
+     center: true
+     self_contained: true
+     highlight: default
+---
+
+## Lecture 6
+
+- Conclude an introduction to EDA
+- Review research proposals
+- Work on R assignment
+
+
+# Exploratory Data Analysis
+
+## Boxplots
+- Graphical depictions of groups of numerical data through their quartiles. 
+- Box plots may have lines extending indicating variability outside the upper and lower quartiles
+- Hence the terms box-and-whisker plot and box-and-whisker diagram.
+
+##
+```{r}
+# Boxplot of MPG by Car Cylinders 
+boxplot(mpg~cyl,data=mtcars, main="Car Milage Data", 
+  	xlab="Number of Cylinders", ylab="Miles Per Gallon")
+```
+
+
+##
+```{r, warning=FALSE, message=FALSE, fig.height=5, fig.width=6}
+# Notched Boxplot of Tooth Growth Against 2 Crossed Factors
+# boxes colored for ease of interpretation 
+boxplot(len~supp*dose, data=ToothGrowth, notch=TRUE, 
+  col=(c("gold","darkgreen")),
+  main="Tooth Growth", xlab="Suppliment and Dose")
+```
+
+## Violin Plots
+- Blah Blah
+- Blah Blah
+
+##
+```{r, warning=FALSE, message=FALSE, fig.width=5, fig.height=5}
+# Violin Plots
+library(vioplot); 
+x1 <- mtcars$mpg[mtcars$cyl==4];x2 <- mtcars$mpg[mtcars$cyl==6];x3 <- mtcars$mpg[mtcars$cyl==8]
+vioplot(x1, x2, x3, names=c("4 cyl", "6 cyl", "8 cyl"), 
+   col="gold")
+title("Violin Plots of Miles Per Gallon")
+```
+
+
+
+## QQ Plots
+is a probability plot, which is a graphical method for comparing two probability distributions by plotting their quantiles against each other. 
+
+##
+```{r}
+# Q-Q Plot for variable MPG 
+qqnorm(mtcars$mpg)
+qqline(mtcars$mpg)
+```
+
+##
+```{r, warning=FALSE, message=FALSE}
+library(car); library(multcomp)
+qqPlot(lm(response~ trt, data=cholesterol), 
+       simulate=TRUE, main="Q-Q Plot", labels=FALSE)
+
+```
+
+
+## Dot plots
+- a representation of a distribution with groups of data points plotted on a simple scale. 
+- Dot plots are used for continuous, quantitative, univariate data. 
+
+
+
+
+
+##
+```{r, fig.width=6, fig.height=5.5}
+# Simple Dotplot
+dotchart(mtcars$mpg,labels=row.names(mtcars),cex=.7,
+  	main="Gas Milage for Car Models", 
+   xlab="Miles Per Gallon")
+```
+
+##
+```{r, echo=FALSE}
+# Kabacoff 2015, p. 134
+x <- mtcars[order(mtcars$mpg),]
+x$cyl <- factor(x$cyl)
+
+x$color[x$cyl==4] <- "red"
+x$color[x$cyl==6] <- "blue"
+x$color[x$cyl==8] <- "darkgreen"
+
+dotchart(x$mpg,
+         labels = row.names(x),
+         cex = .7,
+         groups = x$cyl,
+         gcolor = "black",
+         color = x$color,
+         pch=19,
+         main = "Gass Mileage for Car Models\ngrouped by cylinder",
+         xlab = "Miles per Gallon")
+```
+
+- sorted by `mpg`, grouped & colored by `cyl`
+
+##
