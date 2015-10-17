@@ -41,8 +41,8 @@ boxplot(len~supp*dose, data=ToothGrowth, notch=TRUE,
 ```
 
 ## Violin Plots
-- Blah Blah
-- Blah Blah
+- are a [non-parametric](https://en.wikipedia.org/wiki/Nonparametric_statistics) way to estimate the [probability density function](https://en.wikipedia.org/wiki/Probability_density_function) of a given variable.  
+- Basically a box plot with a probability density plot included
 
 ##
 ```{r, warning=FALSE, message=FALSE, fig.width=5, fig.height=5}
@@ -57,7 +57,9 @@ title("Violin Plots of Miles Per Gallon")
 
 
 ## QQ Plots
-is a probability plot, which is a graphical method for comparing two probability distributions by plotting their quantiles against each other. 
+- Is a visual assessment of the assumption of normality
+- Essentially a graphical probability plot, which compares two probability distributions by plotting their quantiles against each other. 
+- Perfect normality would result in a straight line
 
 ##
 ```{r}
@@ -80,9 +82,6 @@ qqPlot(lm(response~ trt, data=cholesterol),
 - Dot plots are used for continuous, quantitative, univariate data. 
 
 
-
-
-
 ##
 ```{r, fig.width=6, fig.height=5.5}
 # Simple Dotplot
@@ -90,6 +89,7 @@ dotchart(mtcars$mpg,labels=row.names(mtcars),cex=.7,
   	main="Gas Milage for Car Models", 
    xlab="Miles Per Gallon")
 ```
+
 
 ##
 ```{r, echo=FALSE}
@@ -114,4 +114,146 @@ dotchart(x$mpg,
 
 - sorted by `mpg`, grouped & colored by `cyl`
 
+
+# Merging Data
+
+
+## Merging data
+
+- One of the most common problems in analytics is "data in disparate locations"
+- This means the relevant data for a given problem is managed in different repositories
+- Could be within the same storage structure or from totally different software platforms
+- Typically solved using a **RDMS** however what if the data is not in the same **RDMS**
+- **Key job** of the analyst is to reformat that data and merge it into a usable format
+
+
+## Merging example
+
+- What tool have we already learned that could merge data?
+
+
+## Merge example
+- The `rbind()` and `cbind()` functions may come to mind.
+- **Problem** is that those functions assume you are merging data with the same dimensions.
+- What is you have a table of sales data for certain customers, and then a table of customer data?
+
+## Merge function `base`
+```
+merge(x, y, by = intersect(names(x), names(y)),
+      by.x = by, by.y = by, all = FALSE, all.x = all, all.y = all,
+      sort = TRUE, suffixes = c(".x",".y"),
+      incomparables = NULL, ...)
+```
+
+- id the two data frames
+- specify the `by =` or the **key** or **keys**
+- cool use the `intersect()` fxn inside the `by =` parameter
+- other options...
+
+
 ##
+```{r}
+dataA <- data.frame(x=c("A", "B","C"), y=c(10, 20, 30))
+dataB <- data.frame(x=c("A", "B","C"), z=c(40, 50, 60))
+dataC <- merge(dataA, dataB, by = "x")
+dataC  #view the merged data
+```
+
+
+# Reshaping data
+
+## Data restructuring
+- Often data needs to be restructured into a valuable format
+- That restucturing could require aggregation (if formula does not result in a singular value)
+
+
+## 
+```{r}
+id <- c(1,1,2,2)
+time <- c(1,2,1,2)
+x1 <- c(5,6,7,8)
+x2 <- c(9,10,11,12)
+
+wide.data <- data.frame(id,time,x1,x2)
+wide.data
+```
+
+## Melted data
+```{r}
+library(reshape2)
+melt.data <- melt(wide.data, id=c("id","time"))
+melt.data
+```
+
+## Casted data 
+```{r}
+# cast the melted data using cast(data, formula, function) 
+casted.data <- dcast(melt.data, id + time~variable)
+casted.data
+```
+
+
+## Aggregated cast
+```{r}
+# cast the melted data using cast(data, formula, function) 
+subjmeans <- dcast(melt.data, id~variable, mean)
+subjmeans
+timemeans <- dcast(melt.data, time~variable, mean)
+timemeans
+```
+
+
+# Data Visualization
+
+## EDA quality graphics
+```{r, echo=FALSE}
+
+plot(iris$Sepal.Length, iris$Sepal.Width)
+
+```
+
+## Story-telling graphics
+![paygap](https://dl.dropboxusercontent.com/u/62107122/payGap.png)
+
+
+## Both Graphics made with R
+
+- difference between the two graphic is the settings and annotations
+- there is tremendous power built into R to create powerful detailed graphics
+- We will review the **basics** but you must experiment in order to really get to be an expert.
+
+## 
+```{r, fig.width=7, fig.height=5}
+# 4 figures arranged in 2 rows and 2 columns
+par(mfrow=c(2,2))
+plot(mtcars$wt,mtcars$mpg, main="Scatterplot of wt vs. mpg")
+plot(mtcars$wt,mtcars$disp, main="Scatterplot of wt vs disp")
+hist(mtcars$wt, main="Histogram of wt")
+boxplot(mtcars$wt, main="Boxplot of wt")
+```
+
+##
+```{r, fig.width=7, fig.height=5}
+# 3 figures arranged in 3 rows and 1 column
+par(mfrow=c(3,1)) 
+hist(mtcars$wt)
+hist(mtcars$mpg)
+hist(mtcars$disp)
+```
+
+
+##
+```{r}
+# Add boxplots to a scatterplot
+par(fig=c(0,0.8,0,0.8), new=TRUE)
+plot(mtcars$wt, mtcars$mpg, xlab="Car Weight",
+  ylab="Miles Per Gallon")
+par(fig=c(0,0.8,0.55,1), new=TRUE)
+boxplot(mtcars$wt, horizontal=TRUE, axes=FALSE)
+par(fig=c(0.65,1,0,0.8),new=TRUE)
+boxplot(mtcars$mpg, axes=FALSE)
+mtext("Enhanced Scatterplot", side=3, outer=TRUE, line=-3)
+```
+
+
+
