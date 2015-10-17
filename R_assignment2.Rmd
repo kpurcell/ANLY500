@@ -1,0 +1,141 @@
+---
+title: "Untitled"
+author: "KP"
+date: "October 16, 2015"
+output: html_document
+---
+
+## Directions
+
+Below is a document with a number of questions focused on either `R` information or on `R` code.  To complete these questions create **code chunks** that provide a response to code based questions.  Full completion of this assignment requies the submission of a completed `.rmd' file and a html document created using knitr that displays my text and your responses.  All files should be submitted using the "R Assignment 2" assignment on Moodle.
+
+
+## Questions
+
+1. First create simulated data that shows store volume data for a 60 month period.  This data set should have four variables (date, vol, rev, store).  I will give you a piece of code to simulate 60 dates starting at a give point in time.  Your task will be to generate the rest of the data.  The volume data should be a random distribution of data with a mean of 60,000 and a standard deviation of 10,000. The revenue (rev) data should be proportional to the volume data based on the idea that each unit costs $2.18.  Finally we need to create a store id vector.  Lets assume we have 4 stores (A, B, C, D) and this time lets simulate our data using probabilites.  The probability of store A is 0.1, B is 0.2, C is 0.65, and finally D is 0.05.  (Hint: use the sample function to make the store data).  Once the vectors have been created combine them into a data set entitled `vol.dat` and show the top values. 
+
+```{r}
+# Create volume data
+date <- seq(as.Date("2010/1/1"), by = "month", length.out = 60)
+vol <- rnorm(60, mean=60000, sd=10000)
+rev <- vol*2.18
+store <- sample(LETTERS[1:4], 60000, replace=TRUE, prob=c(0.1, 0.2, 0.65, 0.05))
+
+vol.dat <- data.frame(date, vol, rev, store)
+head(vol.dat)
+```
+
+
+2. Now in addition to the volume and revenue data we just created we need to assess what access our four stores have to customers.  The top four cities in PA have populations of 1,560,297, 305,812, 119,132, and 101,786, respectively.  Now create a data frame with the same four stores (A, B, C, D) and a second vector `pop` that equals the above population sizes.  View `pop.dat`.
+
+```{r}
+store <- c("A", "B", "C", "D") # four letters representing cities
+pop <- c(1560297, 305812, 119132,101786) #for top pop size cities in PA
+pop.dat <- data.frame(store, pop)
+pop.dat
+```
+
+3. Next merge the two created data sets (vol.dat, pop.dat) into a single data set `full.dat`.  Print out 15 rows of data from the somewhere between row 100 and row 10000.  Finally, verify that the data merged properly using a data summary. 
+
+```{r}
+full.dat <- merge(vol.dat, pop.dat, by="store")
+head(full.dat[100:115,])
+summary(full.dat)
+```
+
+
+4. Create a new `year` vector in the the `full.dat` data frame that is derived from the `date` field that currently exists.  This question is meant to push you to use a new package.  There a number of packages in `R` that makes dates easier to work with.  (Hint: try `lubridate`)
+
+```{r}
+library(lubridate)
+full.dat$year <- year(full.dat$date)
+names(full.dat)
+summary(full.dat)
+```
+
+
+5. Using the `full.dat` data frame create a new data frame `short.dat` that contains data up to 2012.  That create a contingency table of this data based on `store` and `year`.  
+
+```{r}
+short.dat <- full.dat[full.dat$year<=2012,]
+library(gmodels)  # Offers tools for model fitting
+CrossTable(short.dat$store, short.dat$year, 
+           prop.t=TRUE, # include table of proportions
+           prop.r=TRUE, # include row proportions
+           prop.c=TRUE) # include column proportions
+```
+
+
+           
+4. Create a plot that visualizes the relationship between volume and revenue in the `full.dat` data frame.  
+
+```{r}
+plot(full.dat$vol, full.dat$rev)
+```
+
+
+5. Modify the plot from above, this time adding a title, and modified x- and y-axis titles.  Also change the plotted points to diamonds (Hint: for symbol options look for the pch parameter)
+
+```{r}
+plot(full.dat$vol, full.dat$rev, 
+     main = "The relationship between\n Volume and Revenue",
+     ylab = "Store Revenue in dollars",
+     xlab = "Sales volume in units",
+     pch = 2)  #diamonds
+```
+
+
+6. Using a boxplot graphically display the distribution of revenue for the four different stores.
+
+```{r}
+boxplot(rev~store, data=full.dat, notch=TRUE,
+  main="revenue", xlab="Store")
+```
+
+7. Using the full.dat data frame calculate the total revenue by year and display the variability in revenue with a dotchart.
+
+```{r}
+year.dat <- aggregate(rev~year, data=full.dat, sum)
+head(year.dat)
+dotchart(year.dat$rev,labels=year.dat$year,cex=.7,
+  	main="Revenue by year", 
+   xlab="Dollars")
+
+```
+
+
+8. Now show that same year over year revenue as a line chart.  Label all axis properly, include a title and plot both points for each year and a line that connects those points.
+
+```{r}
+plot(year.dat$year,year.dat$rev,type = "b",
+     ylab = "Revenue in dollar",
+     xlab = "Year")
+```
+
+9. While we know that the relationship between sales volumen and revenue should be a factor of $2.18 because we simulated that data, there is a way we can verify our simulated data is correct.  Essentially we construct a simple linear model (function lm()) and look at the relationship.  Construct a linear model object for the relationship between rev and vol.  Verify from that object that the relationship between vol and rev is infact 2.18.
+
+```{r}
+fit <- lm(full.dat$rev~full.dat$vol, data=full.dat)
+fit
+```
+
+10. Finally, create a multi-paneled plot that summaries the work we have done on this revenue data set.  Include a historgram showing the distribution of both rev and vol, a qqplot for the relationship between rev and vol and a boxplot of rev by store.
+
+
+```{r}
+par(mfrow=c(2,2))
+hist(full.dat$rev)
+hist(full.dat$vol)
+library(car)
+qqPlot(lm(rev~ vol, data=full.dat), 
+       simulate=TRUE, main="Q-Q Plot", labels=FALSE)
+boxplot(rev~store, data=full.dat, notch=TRUE,
+  main="revenue", xlab="Store")
+```
+
+
+11. As an extra plot the output of the fitted linear model object from question 9.
+```{r}
+plot(fit)
+```
+```
