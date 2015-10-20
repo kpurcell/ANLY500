@@ -54,7 +54,59 @@ t.test(sales, mu=10500)
 
 
 ## Wilcoxon signed-rank test
+>- the `t.test()` is not overly sensitive to violations of the assumption of **normality**.
+>- However, if your data drastically depart from normality or it is a significant concern, then the *Wilcoxon signed-rank test* is the best option.
+>- The Wilcoxon signed-rank test is implemented in `R` using `wilcox.test()`
+>- `wilcox.test` is a [non-parametric](https://en.wikipedia.org/wiki/Nonparametric_statistics) mean that it is not based on a parameter coming from a assumed probability distribution.
 
+## Wilcoxon signed-rank test
+>- methodological details of the [wilcoxon signed-rank test](https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test) are similar but based on replacing data with order statistics.
+>- Procedure: subtract $\mu_o$ and rank the difference based on absolute numerical value (i.e. ignore the sign).  Then cum the ranks assuming that the distribution is symmetrical around $\mu_o$.  
+>- This test is computationally challanging with a large $n$, however with large $n$ the $N(\mu, \sigma^2)$ becomes reasonable.
+
+## `wilcox.test` Example
+```{r}
+wilcox.test(sales)
+```
+>- Why is the result differenet? No specified $\mu$ value.
+
+## `wilcox.test` Example
+```{r}
+wilcox.test(sales, mu=10500)
+```
+
+
+## Two sample $t$ test
+
+>- This test evaluate the hypothesis that two samples are derived from the same distribution with the same mean ($\mu$).  
+>- Two sampled tests are relatively similar to one-sampled tests
+>- Data are derived from two groups, both from a $N(\mu, \sigma^2)$.
+>- The *null hypothesis* is that $\mu_1 = \mu_2$.
+
+
+## Two sample $t$ test
+>- The $t$ test is statistical test for which the test statistics ($t$) follows the [Student's t distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution). 
+>- Introduced by [William Gosset](https://en.wikipedia.org/wiki/William_Sealy_Gosset) in 1908 while working at the Guiness Brewery.  
+>- He published his work under the psudeonym "Student", hence the tests name
+>- In `R` the test is executed using the `t.test()` function.
+
+## `t.test` Example
+```{r}
+pre <- rnorm(10, mean=7000, sd=25)
+post <- rnorm(10, mean=5000, sd=25)
+dat <- data.frame(pre, post)
+t.test(dat$pre, dat$post, paired=TRUE)
+```
+
+>- The null hypothesis is rejected... So what does that mean?
+
+- The $\mu_1 \neq \mu_2$
+
+
+
+
+
+ 
 
 
 
