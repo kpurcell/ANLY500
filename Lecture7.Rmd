@@ -1,0 +1,64 @@
+---
+title: 'Lecture 7: One & Two-Sample Tests and Regression'
+date: "October 21, 2015"
+output: 
+  revealjs::revealjs_presentation:
+     theme: serif
+     center: true
+     self_contained: true
+     highlight: default
+     incremental: true
+---
+
+## Lecture 6 Wrap-Up
+
+>- Completed EDA discussion
+>- Proposals review
+>- R assignment #2
+>- Both submitted online through Moodle
+
+
+# Statistics Analysis with **R**
+
+
+## 
+>"**Analytics** is the discovery and communication of meaningful patterns in data. Especially valuable ..., analytics relies on the simultaneous application of **statistics**, **computer programming** and **operations research** to quantify performance. Analytics often favors **data visualization** to communicate insight." -Wikipedia
+
+
+## One Sample Tests
+>- One-sample tests are based on the *assuption* that a sample is derived from a [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution). 
+>- This test evaluates our data $x_1, \dots, x_n$ which are independent data from a random varaibles of a **normal distribution** $N(\mu,\sigma^2)$ with a mean ($\mu$) and variance ($\sigma$).  
+>- The objective is to test the *null hypothesis* that $\mu = \mu_o$.
+>- This test is referred to as a **t test** and is implemented in `R` using the `t.test()` function.
+
+
+## `t.test()` Example
+```{r}
+# Joe's sales numbers
+sales <- c(10223, 10023, 9899, 11023, 10001, 10040, 7989, 10567)
+mean(sales)
+sd(sales)
+quantile(sales)
+# 8 monthes ago he was given a quota of $10500
+# How is he doing
+```
+
+
+## `t.test()` Example
+```{r}
+# Test how he is doing
+t.test(sales, mu=10500)
+```
+
+- no support for rejecting the *null hypothesis* $\mu = \mu_o$
+
+
+## Wilcoxon signed-rank test
+
+
+
+
+
+
+
+
