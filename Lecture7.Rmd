@@ -1,13 +1,7 @@
 ---
 title: 'Lecture 7: One & Two-Sample Tests and Regression'
 date: "October 21, 2015"
-output: 
-  revealjs::revealjs_presentation:
-     theme: serif
-     center: true
-     self_contained: true
-     highlight: default
-     incremental: true
+output: ioslides_presentation
 ---
 
 ## Lecture 6 Wrap-Up
@@ -92,8 +86,8 @@ wilcox.test(sales, mu=10500)
 
 ## `t.test` Example
 ```{r}
-pre <- rnorm(10, mean=7000, sd=25)
-post <- rnorm(10, mean=5000, sd=25)
+pre <- rnorm(10, mean=7000, sd=300)
+post <- rnorm(10, mean=5000, sd=300)
 dat <- data.frame(pre, post)
 t.test(dat$pre, dat$post, paired=TRUE)
 ```
@@ -101,6 +95,24 @@ t.test(dat$pre, dat$post, paired=TRUE)
 >- The null hypothesis is rejected... So what does that mean?
 
 - The $\mu_1 \neq \mu_2$
+
+
+## Regression Analysis
+
+>- A core technique in statistics.
+>- [Regression](http://onlinestatbook.com/2/regression/intro.html) is a set of methods that predict a response variable (AKA: *dependent, criterion, outcome*) based on one or a series of predictor variables (AKA: *independent, explanatory*).
+>- Regression **identifies** the predictor variables that are related to the response variables, **describes** the relational form, and provides an equation for **predicting** the response variable from subsequent predictors.
+<!---
+This came from R in Action p167
+-->
+
+## Regression Analysis
+
+>- The model for a linear regression is:
+$$ y_i = \alpha + \beta x_i + \varepsilon_i $$
+
+>- 
+
 
 
 
