@@ -1,5 +1,5 @@
 ---
-title: 'Lecture 7: One & Two-Sample Tests and Regression'
+title: 'Theories, One & Two-Sample Tests, and Regression'
 date: "October 21, 2015"
 output: 
   revealjs::revealjs_presentation:
@@ -15,6 +15,71 @@ output:
 - Proposals review
 - R assignment #2
 - Both submitted online through Moodle
+
+
+# Chapter 4: Theories in Scientific Research
+
+## Theories
+
+>"A scientific theory is a system of *constructs* (concepts) and *propositions* (relationships between those constructs) that collectively presents a logical, systematic, and coherent explanation of a phenomenon of interest within some assumptions and boundary conditions"
+
+## Correlation vs Causation
+- Should explain **Why** things occur, not simply predict an occurence.
+- Predictions based on *predictors* are possible without explaination.
+- Ex: Market fluctuations following Fed announcements.
+- This prediction is a possible due to *correlation* but does not inherently explain *causation*
+
+## Causation
+- A theory explaining *causation* require an understanding of cause-effect relationships
+- Establishing causation requires:
+1. correlations between two constructs (concepts or variables)
+2. temporal precendence (cause must precede the effect)
+3. rejection of alternative hypotheses
+
+## Causal Explanations
+- Explanations can be **idiographic** or **nomothetic**.
+- **idographic** explanations detail a single situation with idosyncaratic detail.  The are not *generalizable* or can not be applied in other situations
+- **nomothetic** explanations attempt to explain a broad class of conditions.  However, a generalized explanations suffers from less precision and detail.
+
+## Theory Building blocks
+1. Constructs - the "what" of theories
+2. Propositions - the "how" of theories
+3. Logic - the "why" of theories
+4. Boundary conditions/assumptions - the "who" of theories
+
+## Constructs
+- These are high level, abstractions that are chosen to explain a phenomenon.
+- Used to explain both simple and complex.
+- Measurable representations of constructs are called **variables**
+
+## Propositions
+- associations postulated between construts based on deductive logic.
+- are stated in [declarative](https://en.wikipedia.org/wiki/Sentence_(linguistics)#By_purpose) language, mean they indicate a cause-effect relationship.
+- must be **testable** and rejective if not supported by empirical evidence.
+- Empirical forumulations of propositions are called **hypotheses**
+- The difference between propositions (formulated theoretically) and hyptheses (formulated empirically) is detailed in Figure 4.1 (pg 27 of methods text).
+
+
+## 
+![fig4-1](https://dl.dropboxusercontent.com/u/62107122/Fig4-1.png)
+
+
+## Logic
+- provides the justification for postulated propositions
+- forms the connections between constructs
+- represents the "explanation" that lies at the core of theories
+
+
+## Boundary conditions/Assumptions
+- contextualize the use of a given theory
+- They dictate how "generalizable" a theory can be
+
+
+## Attributes of goog theory
+- logical consistancy - do all parts make sense together?
+- explanatory power - how much does a theory explain or predict?
+- falsifiability - can the theory be disproved? (Popper)
+- parsimony - how much can be explained with as few variables as possible "Occam's razor"
 
 
 # One & Two-sample Tests
@@ -163,9 +228,18 @@ $$ \hat{y} = \hat{\beta_0} + \hat{\beta_1}x $$
 - The distance between the data points and the regression line is called the *residuals*.
 
 
-
-
 ## Residuals
+- So if: $\hat{y} = \hat{\beta_0} + \hat{\beta_1}x_1$ is the prediction for $Y$ based on the $i^{th}$ value of $X$
+- Then, $\varepsilon_i = y_i - \hat{y_i}$, which is the $i^{th}$ **residual**.
+- That is the difference between the $i^{th}$ observed value and the $i^{th}$ value predicted from the linear model.
+- The *residual sum of squares* (RSS) is defined as:
+$$ RSS = \varepsilon_1^2 + \varepsilon_2^2 + \dots + \varepsilon_n^2, $$
+- or,
+$$ RSS = (y_1 - \hat{\beta_0} - \hat{\beta_1}x_1)^2 + (y_2 - \hat{\beta_0} - \hat{\beta_1}x_2)^2 + \dots + (y_n - \hat{\beta_0} - \hat{\beta_1}x_n)^2 $$
+
+
+
+## Residuals Visualized
 ```{r, echo=FALSE, warning=F, message=F, fig.width=6, fig.height=6}
 # http://www.r-bloggers.com/how-to-plot-points-regression-line-and-residuals/
 x <- c(173, 169, 176, 166, 161, 164, 160, 158, 180, 187)
@@ -188,21 +262,38 @@ textxy(x, y, res, cx=0.7)
 ```
 
 
-## Residuals
-- So if:$\hat{y} = \hat{\beta_0} + \hat{\beta_1}x_1$ is the prediction for $Y$ based on the $i^{th}$ value of $X$
-- Then, $\varepsilon_i = y_i - \hat{y_i}$, which is the $i^{th}$ **residual**.
-- That is the difference between the $i^{th}$ observed value and the $i^{th}$ value predicted from the linear model.
-- The *residual sum of squares* (RSS) is defined as:
-$$ RSS = \varepsilon_1^2 + \varepsilon_2^2 + \dots + \varepsilon_n^2, $$
 
-
-## RSS minimization
+## Least squares regression
+- least squares chooses $\hat{\beta_0}$ and $\hat{\beta_1}$ that minimize the RSS.
 
 ![RSSoptim](http://i.stack.imgur.com/bmg5Z.png)
 
 
+## Executing a linear model in `R`
+```
+lm(formula, data, subset, weights, na.action,
+   method = "qr", model = TRUE, x = FALSE, y = FALSE, qr = TRUE,
+   singular.ok = TRUE, contrasts = NULL, offset, ...)
+```
+- `formula` symbolic description of the model
+- `data` the data frame (optional)
 
-## 
+##
+```{r}
+str(mod1)
+```
+
+
+##
+```{r}
+summary(mod1)
+```
+
+
+
+
+
+
 
 
 
