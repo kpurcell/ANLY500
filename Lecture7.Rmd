@@ -112,6 +112,22 @@ t.test(dat$pre, dat$post, paired=TRUE)
 <!---
 This came from R in Action p167
 -->
+- A general form of that relationship is:
+$$ Y = f(X) + \varepsilon $$
+- where $f$ is a fixed unknown function, of $X_1, \dots, X_p$, and $\varepsilon$ is a random *error term*
+
+## Regression Analysis
+
+Type of regression | Use
+------------------ | ------------------
+simple linear      | predict quant res from a quant. var
+polynomial         | model $f(X)$ with a $n^{th}$ order polynomial
+multiple linear    | two or more explanatory variables
+logistic           | Predict categorical res from two or > expl vars
+Poisson            | Predict resp based on counts of 1 or > expl vars
+nonlinear          | Predict quant resp 1 or > expl vars $f(X)$ is nonlinear
+time-series        | Modeling time-series w/correlated errors
+
 
 ## Simple Linear Regression
 
@@ -128,31 +144,35 @@ $$ Revenue \approx \beta_0 + \beta_1 \times Coupons $$
 
 
 ## Simple Linear Regression
-- After building the model on training data we produce prameter estimates: \hat{\beta_0} and \hat{\beta_1} with which we can predict future revenue values:
-$$ \hat{y} = \hat{\beta_0} + \had{\beta_1}x $$
-
-
-## How to get $\alpha$, $\beta$, and $\sigma^2$?
-
-- To derive these variables we use a method called *least squares*
-- [Least squares](https://en.wikipedia.org/wiki/Least_squares) regression is a [**optimization**](https://en.wikipedia.org/wiki/Mathematical_optimization) method that seeks to determine values for parameters $\alpha$ and $\beta$ that *minimize* the residual sum of squares (RSS). - Where $\varepsilon_i$ is random and derived from $N(\mu, \sigma^2)$
+- After building the model on training data we produce prameter estimates: $\hat{\beta_0}$ and $\hat{\beta_1}$ with which we can predict future revenue values:
+$$ \hat{y} = \hat{\beta_0} + \hat{\beta_1}x $$
+- where, $\hat{y}$ is a predicted value of $Y$ given that $X$ = $x$. (So $ \hat{} $ values indicate estimated parameters or predicted values).
 
 
 
+## Estimating model coefficients
+
+- To derive these parameter values we use a method called *least squares*
+- [Least squares](https://en.wikipedia.org/wiki/Least_squares) regression is a [**optimization**](https://en.wikipedia.org/wiki/Mathematical_optimization) method that seeks to determine values for parameters $\hat{\beta_0}$ and $\hat{\beta_1}$ that *minimizes* the distance of data points from the regression line.  
+
+
+## Residuals
+- Given a set of data: $(x_1,y_1),(x_2,y_2), \dots, (x_n,y_n)$
+- In which *revenue* ($y$) and *coupons* ($x$) are recorded for $n=10$ different regions.
+- The objective is fine the intercept ($\hat{\beta_0}$) and slope ($\hat{\beta_1}$) that creates a line as close to the $n=10$ data points as possible.
+- The distance between the data points and the regression line is called the *residuals*.
 
 
 
 
-
-## Residual Sum
-- 
+## Residuals
 ```{r, echo=FALSE, warning=F, message=F, fig.width=6, fig.height=6}
 # http://www.r-bloggers.com/how-to-plot-points-regression-line-and-residuals/
 x <- c(173, 169, 176, 166, 161, 164, 160, 158, 180, 187)
 y <- c(80, 68, 72, 75, 70, 65, 62, 60, 85, 92) 
 # plot scatterplot and the regression line
 mod1 <- lm(y ~ x)
-plot(x, y, xlim=c(min(x)-5, max(x)+5), ylim=c(min(y)-10, max(y)+10))
+plot(x, y, xlim=c(min(x)-5, max(x)+5), ylim=c(min(y)-10, max(y)+10), main="Residuals")
 abline(mod1, lwd=2)
 
 
@@ -168,7 +188,21 @@ textxy(x, y, res, cx=0.7)
 ```
 
 
+## Residuals
+- So if:$\hat{y} = \hat{\beta_0} + \hat{\beta_1}x_1$ is the prediction for $Y$ based on the $i^{th}$ value of $X$
+- Then, $\varepsilon_i = y_i - \hat{y_i}$, which is the $i^{th}$ **residual**.
+- That is the difference between the $i^{th}$ observed value and the $i^{th}$ value predicted from the linear model.
+- The *residual sum of squares* (RSS) is defined as:
+$$ RSS = \varepsilon_1^2 + \varepsilon_2^2 + \dots + \varepsilon_n^2, $$
 
+
+## RSS minimization
+
+![RSSoptim](http://i.stack.imgur.com/bmg5Z.png)
+
+
+
+## 
 
 
 
