@@ -1,18 +1,23 @@
 ---
 title: 'Lecture 7: One & Two-Sample Tests and Regression'
 date: "October 21, 2015"
-output: ioslides_presentation
+output: 
+  revealjs::revealjs_presentation:
+     theme: serif
+     center: true
+     self_contained: true
+     highlight: default
 ---
 
 ## Lecture 6 Wrap-Up
 
->- Completed EDA discussion
->- Proposals review
->- R assignment #2
->- Both submitted online through Moodle
+- Completed EDA discussion
+- Proposals review
+- R assignment #2
+- Both submitted online through Moodle
 
 
-# Statistics Analysis with **R**
+# One & Two-sample Tests
 
 
 ## 
@@ -20,10 +25,10 @@ output: ioslides_presentation
 
 
 ## One Sample Tests
->- One-sample tests are based on the *assuption* that a sample is derived from a [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution). 
->- This test evaluates our data $x_1, \dots, x_n$ which are independent data from a random varaibles of a **normal distribution** $N(\mu,\sigma^2)$ with a mean ($\mu$) and variance ($\sigma$).  
->- The objective is to test the *null hypothesis* that $\mu = \mu_o$.
->- This test is referred to as a **t test** and is implemented in `R` using the `t.test()` function.
+- One-sample tests are based on the *assuption* that a sample is derived from a [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution). 
+- This test evaluates our data $x_1, \dots, x_n$ which are independent data from a random varaibles of a **normal distribution** $N(\mu,\sigma^2)$ with a mean ($\mu$) and variance ($\sigma$).  
+- The objective is to test the *null hypothesis* that $\mu = \mu_o$.
+- This test is referred to as a **t test** and is implemented in `R` using the `t.test()` function.
 
 
 ## `t.test()` Example
@@ -48,21 +53,22 @@ t.test(sales, mu=10500)
 
 
 ## Wilcoxon signed-rank test
->- the `t.test()` is not overly sensitive to violations of the assumption of **normality**.
->- However, if your data drastically depart from normality or it is a significant concern, then the *Wilcoxon signed-rank test* is the best option.
->- The Wilcoxon signed-rank test is implemented in `R` using `wilcox.test()`
->- `wilcox.test` is a [non-parametric](https://en.wikipedia.org/wiki/Nonparametric_statistics) mean that it is not based on a parameter coming from a assumed probability distribution.
+- the `t.test()` is not overly sensitive to violations of the assumption of **normality**.
+- However, if your data drastically depart from normality or it is a significant concern, then the *Wilcoxon signed-rank test* is the best option.
+- The Wilcoxon signed-rank test is implemented in `R` using `wilcox.test()`
+- `wilcox.test` is a [non-parametric](https://en.wikipedia.org/wiki/Nonparametric_statistics) mean that it is not based on a parameter coming from a assumed probability distribution.
 
 ## Wilcoxon signed-rank test
->- methodological details of the [wilcoxon signed-rank test](https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test) are similar but based on replacing data with order statistics.
->- Procedure: subtract $\mu_o$ and rank the difference based on absolute numerical value (i.e. ignore the sign).  Then cum the ranks assuming that the distribution is symmetrical around $\mu_o$.  
->- This test is computationally challanging with a large $n$, however with large $n$ the $N(\mu, \sigma^2)$ becomes reasonable.
+- methodological details of the [wilcoxon signed-rank test](https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test) are similar but based on replacing data with order statistics.
+- Procedure: subtract $\mu_o$ and rank the difference based on absolute numerical value (i.e. ignore the sign).  Then cum the ranks assuming that the distribution is symmetrical around $\mu_o$.  
+- This test is computationally challanging with a large $n$, however with large $n$ the $N(\mu, \sigma^2)$ becomes reasonable.
 
 ## `wilcox.test` Example
 ```{r}
 wilcox.test(sales)
 ```
->- Why is the result differenet? No specified $\mu$ value.
+- Why is the result differenet? 
+>- No specified $\mu$ value.
 
 ## `wilcox.test` Example
 ```{r}
@@ -72,17 +78,17 @@ wilcox.test(sales, mu=10500)
 
 ## Two sample $t$ test
 
->- This test evaluate the hypothesis that two samples are derived from the same distribution with the same mean ($\mu$).  
->- Two sampled tests are relatively similar to one-sampled tests
->- Data are derived from two groups, both from a $N(\mu, \sigma^2)$.
->- The *null hypothesis* is that $\mu_1 = \mu_2$.
+- This test evaluate the hypothesis that two samples are derived from the same distribution with the same mean ($\mu$).  
+- Two sampled tests are relatively similar to one-sampled tests
+- Data are derived from two groups, both from a $N(\mu, \sigma^2)$.
+- The *null hypothesis* is that $\mu_1 = \mu_2$.
 
 
 ## Two sample $t$ test
->- The $t$ test is statistical test for which the test statistics ($t$) follows the [Student's t distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution). 
->- Introduced by [William Gosset](https://en.wikipedia.org/wiki/William_Sealy_Gosset) in 1908 while working at the Guiness Brewery.  
->- He published his work under the psudeonym "Student", hence the tests name
->- In `R` the test is executed using the `t.test()` function.
+- The $t$ test is statistical test for which the test statistics ($t$) follows the [Student's t distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution). 
+- Introduced by [William Gosset](https://en.wikipedia.org/wiki/William_Sealy_Gosset) in 1908 while working at the Guiness Brewery.  
+- He published his work under the psudeonym "Student", hence the tests name
+- In `R` the test is executed using the `t.test()` function.
 
 ## `t.test` Example
 ```{r}
@@ -92,26 +98,76 @@ dat <- data.frame(pre, post)
 t.test(dat$pre, dat$post, paired=TRUE)
 ```
 
->- The null hypothesis is rejected... So what does that mean?
+- The null hypothesis is rejected... So what does that mean?
 
-- The $\mu_1 \neq \mu_2$
+>- The $\mu_1 \neq \mu_2$
+
+
+# Regression and Correlation
 
 
 ## Regression Analysis
-
->- A core technique in statistics.
->- [Regression](http://onlinestatbook.com/2/regression/intro.html) is a set of methods that predict a response variable (AKA: *dependent, criterion, outcome*) based on one or a series of predictor variables (AKA: *independent, explanatory*).
->- Regression **identifies** the predictor variables that are related to the response variables, **describes** the relational form, and provides an equation for **predicting** the response variable from subsequent predictors.
+- [Regression](http://onlinestatbook.com/2/regression/intro.html) is a set of methods that predict a response variable (AKA: *dependent, criterion, outcome*) based on one or a series of predictor variables (AKA: *independent, explanatory*).
+- Regression **identifies** the predictor variables that are related to the response variables, **describes** the relational form, and provides an equation for **predicting** the response variable from subsequent predictors.
 <!---
 This came from R in Action p167
 -->
 
-## Regression Analysis
+## Simple Linear Regression
 
->- The model for a linear regression is:
-$$ y_i = \alpha + \beta x_i + \varepsilon_i $$
+- The simplest model for a linear regression is:
+$$ Y \approx \beta_0 + \beta_1 X $$
 
->- 
+- Where $\approx$ means "approximately modeled as"
+- Here we are regressing $Y$ on $X$
+- For instance:
+$$ Revenue \approx \beta_0 + \beta_1 \times Coupons $$
+- Parameters $\beta_0$ and $\beta_1$ are unknown values
+- The *regression coefficient* ($\beta_1$) is the slope of the line.
+- The regression line intercepts the $y$-axis at $\beta_0$.
+
+
+## Simple Linear Regression
+- After building the model on training data we produce prameter estimates: \hat{\beta_0} and \hat{\beta_1} with which we can predict future revenue values:
+$$ \hat{y} = \hat{\beta_0} + \had{\beta_1}x $$
+
+
+## How to get $\alpha$, $\beta$, and $\sigma^2$?
+
+- To derive these variables we use a method called *least squares*
+- [Least squares](https://en.wikipedia.org/wiki/Least_squares) regression is a [**optimization**](https://en.wikipedia.org/wiki/Mathematical_optimization) method that seeks to determine values for parameters $\alpha$ and $\beta$ that *minimize* the residual sum of squares (RSS). - Where $\varepsilon_i$ is random and derived from $N(\mu, \sigma^2)$
+
+
+
+
+
+
+
+
+## Residual Sum
+- 
+```{r, echo=FALSE, warning=F, message=F, fig.width=6, fig.height=6}
+# http://www.r-bloggers.com/how-to-plot-points-regression-line-and-residuals/
+x <- c(173, 169, 176, 166, 161, 164, 160, 158, 180, 187)
+y <- c(80, 68, 72, 75, 70, 65, 62, 60, 85, 92) 
+# plot scatterplot and the regression line
+mod1 <- lm(y ~ x)
+plot(x, y, xlim=c(min(x)-5, max(x)+5), ylim=c(min(y)-10, max(y)+10))
+abline(mod1, lwd=2)
+
+
+# calculate residuals and predicted values
+res <- signif(residuals(mod1), 5)
+pre <- predict(mod1) 
+# plot distances between points and the regression line
+segments(x, y, x, pre, col="red")
+
+# add labels (res values) to points
+library(calibrate)
+textxy(x, y, res, cx=0.7)
+```
+
+
 
 
 
