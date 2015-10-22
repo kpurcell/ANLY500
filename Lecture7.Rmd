@@ -75,7 +75,7 @@ output:
 - They dictate how "generalizable" a theory can be
 
 
-## Attributes of goog theory
+## Attributes of good theory
 - logical consistancy - do all parts make sense together?
 - explanatory power - how much does a theory explain or predict?
 - falsifiability - can the theory be disproved? (Popper)
