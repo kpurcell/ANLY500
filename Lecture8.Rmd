@@ -1,0 +1,196 @@
+---
+title: 'Lecture 8: Regression, Correlation, Reproducible Research and Dynamic Documents'
+author: "KM Purcell"
+date: "October 28, 2015"
+output: 
+  revealjs::revealjs_presentation:
+     theme: serif
+     center: true
+     self_contained: true
+     highlight: default
+---
+
+## Lecture 7 Wrap-Up
+
+- Scientific theories
+- One-way and Two-way tests
+- Non-parametric two-way tests
+- Regression background
+- Introduction to `lm()`
+
+
+# Regression Continued
+
+## Questions answered by **regression**
+
+1. Which predictors $X_1, X_2, \dots, X_p$ important in predicting the response variable ($Y$)?
+2. How many *predictor* variables explain variability in the *response* ($Y$)?
+3. How well does the model fit the data?
+4. Given a set of *predictor* values, what *response* value should we predict, and how accurate is that prediction?
+
+
+## Question 1: which predictors are important
+- In **simple regression** to evaluate if a relationship exists b/w *response* and *predictor* we evaluate if $\beta_1 = 0$.
+- In a **multiple regression** framework with $p$ predictors you ask if all the *regression coefficients* are equal to zero.
+$$ \beta_1 = \beta_2 = \dots = \beta_p $$
+
+## Hypothesis testing
+- In **simple** regression:
+$$ H_o: \beta_1 = 0 $$
+versus:
+$$ H_a:\beta_1 \neq 0 $$
+
+- In **multiple** regression:
+$$ H_o:\beta_1 = \beta_2 = \dots = \beta_p = 0 $$
+versus:
+$$ H_a:\exists \beta_j \neq 0 $$
+
+## Multiple regression hypothesis testing
+- This hypothesis test is performed by computing the *F-statistic*
+- calculated as:
+$$ F = \frac{(TSS - RSS)/p}{RSS/(n - p -1)} $$
+
+- where $TSS = \sum(y_i - \bar{y})^2$, and $RSS = \sum(y_i - \hat{y_i})^2$
+
+## Model assumptions
+- If your model does not violate assumptions, 
+- no relationship between *respone* and *predictors* would produce and *F-statistics* close to 1.  
+- if $H_a$ is true we expect $F > 1$
+- **Lets test that with an example**
+
+## Advertising data example
+```{r, echo=TRUE, fig.width=5, fig.height=5, warning=FALSE, message=FALSE}
+data <- read.csv("Advertising.csv")
+data <- data[,2:5]
+names(data)
+head(data)
+```
+
+
+## EDA
+```{r, echo=TRUE, fig.width=5, fig.height=5, warning=FALSE, message=FALSE}
+pairs(data)
+```
+
+
+## Preliminary Model
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+mod1 <- lm(data$Sales ~ data$TV)
+summary(mod1)
+```
+
+## How large is $F$ to reject $H_o$
+- depends on the number of replicates ($n$) and model parameters ($p$)
+- If $n$ is large and $F$ is only slightly greater than 1 you may still be able to reject $H_o$
+- Alternatively, a larger $F$ value is required to reject $H_o$ when $n$ is small.
+- **Note:** the performance of a regression model is highly dependent on the ratio of $n$ to $p$.
+
+## Preliminary Model 2
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+mod2 <- lm(data$Sales ~ data$TV + data$Radio + data$Newspaper)
+summary(mod2)
+```
+
+
+## Dynamic reporting using `stargazer`
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.height=4, fig.width=5}
+library(stargazer)
+stargazer(mod1, mod2,  type = "text")
+```
+
+## Preliminary Model 2
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+mod3 <- lm(data$Sales ~ data$TV + data$Radio)
+summary(mod3)
+```
+
+## Dynamic reporting 2 using `stargazer`
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.height=4, fig.width=5}
+library(stargazer)
+stargazer(mod2, mod3,  type = "text")
+```
+
+
+
+
+## Question 2: Choosing important variables
+- The formulation of a single model containing only *predictors* that are associated with the *response* is termed **variable selection**
+- First step in multiple regression is calculating $F$-statistics and their associated $p$-values.
+- Armed with that information how do you decide which variables to include?
+- Could use p-values but if the $p$ is large could lead to false discoveries.
+
+## Stepwise variable selection
+- Ideal solution is the iteratively build the model evaluating after each iteration.
+- So a model with $p=2$ would evaluate four models: (1) no predictors, (2) model with $X_1$, (2) a model with $X_2$, and finally (4) a model with $X_1$ and $X_2$.
+- We would choose the best model from the iteration, but **how* do we define best?
+
+## Model quality statistics
+- *Mallow's $C_p$*
+- *Akaike information criterion (AIC)*
+- *Bayesian information criterion (BIC)*
+- *adjusted $R^2$*
+
+## Model quality statistics
+- there is a lot of material on model quality stats.
+- we will start with using *adjusted $R^2$* and *AIC*
+- Have you guys hear of either of these?
+
+## Stepwise
+```{r}
+library(MASS)
+full.lm <- lm(Sales ~ ., data = data)
+step.lm <- stepAIC(full.lm, trace = TRUE)
+step.lm$anova
+```
+
+## Parameter explosion 
+- if there are $2^p$ models that contain a subset of $p$ variables that are important.  
+- Trying to identify those $p$ can become *infeasaible*
+- For instance, when $p=2$ then $2^2=4$.
+- Well what if $p=30$.
+
+> - Then $2^{30} = 1,073,741,824$ models
+
+
+## Parameter explosion
+- obviously it is intractable to calculate $1.07 \times 10^{9}$ models
+- Whe require an automated solution to evaluate a set of those models: *forward selection*, *backward selection*, and *mixed selection*
+
+## Forward selection
+- begins with the null model - a model with an intercept and no predictors
+- then fit $p$ simple linear regression models and add to the null model the variable that had the *lowest* RSS.
+- Than add to that model the variable with the lowest RSS for the new two-variable model
+- This continues until a *stopping rule* or some threshold is met.
+
+## Backward selection
+- begins with the *full model* and removes variables with the largest p-value (i.e. the varaible that is the least statistically significant).
+- the new $(p - 1)$ variable model is fit and the variable with the lartest p-value is removed.
+- This continues until a *stopping rule* (ex. a model in which all remaining parameters p-value < some value)
+
+## Mixed selection
+- a combination of *forward* and *backward* selection.
+- Starts with the *null model* and adds parameters similar to *forward*
+- If a p-value for any certain variable rises above a threshold, than it is removed from the model
+- The model continues both *forward* and *backward* until all parameters are have low p-values and all excluded variables have high p-values if added to the model.
+
+## Question 3: Model Fit
+- Two most common numerical measures of model fit are: RSE and $R^2$.
+- Recall, that in *simple linear regression* the $R^2$ statistic indicates the proportion of variance in the data explained by the model.  Calculated by:
+$$ R^2 = \frac{TSS-RSS}{TSS} = 1 - \frac{RSS}{TSS} $$
+- In *multiple regression* $R^2$ is equal to the squre of teh correlation b/w the response and the fitted linear model or $Cor(Y,\hat{Y})^2$.
+
+
+## Question 4: Prediction
+- Once the model is fit, we apply the model for prediction using:
+$$ \hat{y} = \hat{\beta_0} + \hat{\beta_1}x_1 + \hat{\beta_2}x_2 + \dots + \hat{\beta_p}x_p $$
+- ...
+- ...
+
+# Reproducible Research
+
+
+# Dynamic Documents
+
+
+
+
