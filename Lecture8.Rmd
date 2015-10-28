@@ -19,11 +19,11 @@ output:
 - Introduction to `lm()`
 
 
-# Regression Continued
+# Regression II
 
-## Questions answered by **regression**
+## Questions answered by regression
 
-1. Which predictors $X_1, X_2, \dots, X_p$ important in predicting the response variable ($Y$)?
+1. Which predictors ($X_1, X_2, \dots, X_p$) are important in predicting the response variable ($Y$)?
 2. How many *predictor* variables explain variability in the *response* ($Y$)?
 3. How well does the model fit the data?
 4. Given a set of *predictor* values, what *response* value should we predict, and how accurate is that prediction?
@@ -58,6 +58,7 @@ $$ F = \frac{(TSS - RSS)/p}{RSS/(n - p -1)} $$
 - if $H_a$ is true we expect $F > 1$
 - **Lets test that with an example**
 
+
 ## Advertising data example
 ```{r, echo=TRUE, fig.width=5, fig.height=5, warning=FALSE, message=FALSE}
 data <- read.csv("Advertising.csv")
@@ -79,11 +80,13 @@ mod1 <- lm(data$Sales ~ data$TV)
 summary(mod1)
 ```
 
+
 ## How large is $F$ to reject $H_o$
 - depends on the number of replicates ($n$) and model parameters ($p$)
 - If $n$ is large and $F$ is only slightly greater than 1 you may still be able to reject $H_o$
 - Alternatively, a larger $F$ value is required to reject $H_o$ when $n$ is small.
 - **Note:** the performance of a regression model is highly dependent on the ratio of $n$ to $p$.
+
 
 ## Preliminary Model 2
 ```{r, echo=TRUE, warning=FALSE, message=FALSE}
@@ -98,11 +101,13 @@ library(stargazer)
 stargazer(mod1, mod2,  type = "text")
 ```
 
+
 ## Preliminary Model 2
 ```{r, echo=TRUE, warning=FALSE, message=FALSE}
 mod3 <- lm(data$Sales ~ data$TV + data$Radio)
 summary(mod3)
 ```
+
 
 ## Dynamic reporting 2 using `stargazer`
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.height=4, fig.width=5}
@@ -111,24 +116,25 @@ stargazer(mod2, mod3,  type = "text")
 ```
 
 
-
-
 ## Question 2: Choosing important variables
 - The formulation of a single model containing only *predictors* that are associated with the *response* is termed **variable selection**
 - First step in multiple regression is calculating $F$-statistics and their associated $p$-values.
 - Armed with that information how do you decide which variables to include?
 - Could use p-values but if the $p$ is large could lead to false discoveries.
 
+
 ## Stepwise variable selection
 - Ideal solution is the iteratively build the model evaluating after each iteration.
 - So a model with $p=2$ would evaluate four models: (1) no predictors, (2) model with $X_1$, (2) a model with $X_2$, and finally (4) a model with $X_1$ and $X_2$.
 - We would choose the best model from the iteration, but **how* do we define best?
+
 
 ## Model quality statistics
 - *Mallow's $C_p$*
 - *Akaike information criterion (AIC)*
 - *Bayesian information criterion (BIC)*
 - *adjusted $R^2$*
+
 
 ## Model quality statistics
 - there is a lot of material on model quality stats.
@@ -187,6 +193,30 @@ $$ \hat{y} = \hat{\beta_0} + \hat{\beta_1}x_1 + \hat{\beta_2}x_2 + \dots + \hat{
 - ...
 
 # Reproducible Research
+
+## Why Reproducible Research
+- Independent replication is the cornerstone of scientific inquiry.
+- The "ultimate standard" in scientific insight is replication.
+- Maximize efficiency by minimizing redundancy
+
+## Why Reproducible Research
+- Improve work habits - planning for reproduciblity means planning "with the end in mind"
+- Forces a higher-level of error proofing
+- Facilitates team work and communal operations
+- Lowers the effort in reproducing all or parts of an analysis or project.
+- If you work centers on reproducibility it will as a result facilitate higher impacts.
+
+## Tools for a Reproducible Workflow
+- **scientific programming** computational research uses programming languages which facilitate repeatable tools for easier replication and reproducibility.
+- **literate programming** using tools like *knitr* allows you to combine your analysis code and your interpretations in a single document for presentation.  Tools like *knitr* for for a number of languages and platforms.
+- **Markup languages** - simplified coding syntax which allows for complex formatting and document presentation with minimal effort.
+
+
+## Tools for a Reproducible Workflow
+- **Version control systems** - tools such as *git* and *GitHub* allow for version of code.  When you analysis and code are fully integrated you can manage and entire project from start to final presentation.
+- **Shell programs** tools like *GNU Make* and *pandoc* provide a powerful collection of functionality that can simplify the creation, management, and execution of computation analysis.
+
+
 
 
 # Dynamic Documents
