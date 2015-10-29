@@ -96,9 +96,9 @@ summary(mod2)
 
 
 ## Dynamic reporting using `stargazer`
-```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.height=4, fig.width=5}
+```{r, echo=FALSE, results='asis', warning=FALSE, message=FALSE, fig.height=4, fig.width=5}
 library(stargazer)
-stargazer(mod1, mod2,  type = "text")
+stargazer(mod1, mod2,  type = "html")
 ```
 
 
@@ -142,12 +142,17 @@ stargazer(mod2, mod3,  type = "text")
 - Have you guys hear of either of these?
 
 ## Stepwise
-```{r}
+```{r, echo=TRUE, warning=FALSE}
 library(MASS)
 full.lm <- lm(Sales ~ ., data = data)
 step.lm <- stepAIC(full.lm, trace = TRUE)
+```
+
+## ANOVA
+```{r}
 step.lm$anova
 ```
+
 
 ## Parameter explosion 
 - if there are $2^p$ models that contain a subset of $p$ variables that are important.  
@@ -216,11 +221,102 @@ $$ \hat{y} = \hat{\beta_0} + \hat{\beta_1}x_1 + \hat{\beta_2}x_2 + \dots + \hat{
 - **Version control systems** - tools such as *git* and *GitHub* allow for version of code.  When you analysis and code are fully integrated you can manage and entire project from start to final presentation.
 - **Shell programs** tools like *GNU Make* and *pandoc* provide a powerful collection of functionality that can simplify the creation, management, and execution of computation analysis.
 
+## Reproducible Workflow
+![workflow](http://4.bp.blogspot.com/-u3BaetbDxtM/UeR4f8924nI/AAAAAAAAGlU/fnl_KfDSSb8/s1600/Workflow.png)
 
+
+## Tips for reproducible research
+- Document everythin
+- Keep everything as a text file
+- All files should be human readable
+- Explicitly tie files together
+- Have a plan to organize, store, and make your files available
+
+## 
+![fileRelations](https://dl.dropboxusercontent.com/u/62107122/fileStructure.png)
+
+
+## Further inquiry
+![RRRR](http://ecx.images-amazon.com/images/I/41lUHCvVLqL._SX327_BO1,204,203,200_.jpg)
 
 
 # Dynamic Documents
 
+## Hypothetical Analyst process
+- collect/gather data
+- import data into statistical package
+- run a set of procedures to produce analysis results
+- copy and paste results into a typesetting program
+- add descriptions and commentary
+- add figures and tables
+- complete report
+
+## Dangers/Disadvantages of this process
+- Excessive human effort for transferring information between mediums
+- Human effort is error prone
+- Workflow difficult to record especially with GUI tools, therefore difficult to reproduce.
+- Small changes in data, result in having to repeat the entire analysis procedure
+- Seperates the analysis process from the writing/interpretation process, thereby creating problems of syncronization and loss of synthetic thinking.
+
+## Solutions
+- Reports can be generated dynamically, directly from program code.  
 
 
+## An example
+![codeex](https://dl.dropboxusercontent.com/u/62107122/codeEx.PNG)
+
+## To product this
+```{r}
+sales <- c(7384, 2847, 2648, 7594, 3538, 7364)
+```
+- The mean value for sales was `r mean(sales)`
+- The lowest sales of the year was `r min(sales)`
+- The highest sales of the year was `r max(sales)`
+
+
+## To product this
+```{r}
+sales <- c(7384, 2847, 2648, 7594, 3538, 7364,
+           6585, 4839, 1234, 0923, 0934, 812)
+```
+- The mean value for sales was `r mean(sales)`
+- The lowest sales of the year was `r min(sales)`
+- The highest sales of the year was `r max(sales)`
+
+## Same thing with graphics
+```{r, fig.width=4, fig.height=4}
+month <- 1:12; dat <- data.frame(month, sales)
+plot(sales~month, type="b")
+```
+
+
+## subset the data
+```{r, fig.width=4, fig.height=4}
+plot(sales[month<=6]~month[month<=6], type="b")
+```
+
+## Or change the data all together
+```{r, fig.width=4, fig.height=4}
+month <- 12:1; dat2 <- data.frame(month, sales)
+plot(dat2$month,dat2$sales,  type="b")
+```
+
+## Or compound results
+```{r, fig.width=4, fig.height=4}
+plot(dat2$month,dat2$sales,  type="b", col="blue")
+lines(dat$month,dat$sales,  type="b", col="green")
+```
+
+## Dynamic Documents
+- Simplify both the process of analysis and the generation of reports and research summaries
+- Dynamic documents can be in a number of formats: pdf, presentations, word documents, laTex documents, etc
+- They greatly reduce an analysts workload by automating the a **labor intensive** aspect of their job.
+- The initial effort to learn these practices is returned quickly, due to the higly repetitive nature of computationally based statistical analysis.
+
+## Further inquiry
+![DD](http://ecx.images-amazon.com/images/I/41kI1dxXGfL._SX321_BO1,204,203,200_.jpg)
+
+
+## Reading
+- I added a reading on reproducible reseach and version control.  It is written from a scientific research practice but that is why we are here because the techniques of science are being applied in private industry creating a strong appetite for analytics specialists.
 
