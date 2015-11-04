@@ -336,3 +336,37 @@ $$
 - The `car::Anova()` allows for specifying the TYPE II or III if you are matching results with SAS or SPSS
 
 
+## One-way ANOVA example
+```{r, message=FALSE}
+library(multcomp); library(gplots)
+attach(cholesterol)
+head(cholesterol)
+```
+
+
+## One-way ANOVA example
+```{r}
+table(trt)               #Group sample sizes
+```
+
+
+## One-way ANOVA example
+```{r}
+aggregate(response, by=list(trt), FUN=mean) # Group means
+aggregate(response, by=list(trt), FUN=sd) # Group std. dev
+```
+
+## One-way ANOVA example
+```{r}
+fit <- aov(response ~ trt)
+summary(fit)
+```
+
+
+## One-way ANOVA example
+```{r, warning=FALSE, message=FALSE, fig.width=5, fig.height=5}
+plotmeans(response ~ trt, xlab = "Treatment", ylab = "Response",
+          main="Mean Plot with 95% CI")
+detach(cholesterol)
+```
+
