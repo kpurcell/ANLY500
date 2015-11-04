@@ -68,9 +68,10 @@ This came from R in Action, p212
 
 
 ## Experimental Design
-- Treatment is *between-groups* factor w/ 2 levels (CBT & EMDR)
-- Its *b/w groups* because patients are in one or the other treatment
-- Value for each is the *dependent* and treatment is the *independent*
+- Treatment is **between-groups** factor w/ 2 levels (CBT & EMDR)
+- Its **b/w groups** because patients are in one or the other treatment
+- Value for each is the **dependent** and treatment is the **independent**
+
 
 \begin{table}[h!]
   \begin{center}
@@ -88,5 +89,250 @@ This came from R in Action, p212
   \end{center}
 \end{table}
 
+## Sample Size
+- a [statistics sample](https://en.wikipedia.org/wiki/Sample_(statistics)) is the set of data points collected or selected from a larger population based in the experiental procedure.
+- Because this experiment has equal numbers in both treatments it is called a **balanaced** design.
+- the alterantive would be called an **unbalanced** design
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{\textbf{One-way between-groups ANOVA.} Two treatments: cognitive behavior therapy (CBT) and eye desensitization and reprocessing (EMDR)}
+    \label{tab:table1}
+    \begin{tabular}{c|c}
+      CBT & EMDR \\
+      \hline
+      s1 & s6\\
+      s2 & s7\\
+      s3 & s8\\
+      s4 & s9\\
+      s5 & s10\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+## One-way within-group ANOVA
+- What if we wanted to evalute the effect of CBT on anxiety overy time
+- Place all patients in the CBT group and test them after therapy and then 6 months later.
+
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{\textbf{One-way within-groups ANOVA.} One treatment: cognitive behavior therapy (CBT) tested over time}
+    \label{tab:table1}
+    \begin{tabular}{c||c|c}
+      & \multicolumn{2}{|c }{Time}\\
+      \hline
+      Patient & 5 weeks & 6 months \\
+      \hline
+      s1 & &\\
+      s2 & &\\
+      s3 & &\\
+      s4 & &\\
+      s5 & &\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+## One-way within-group ANOVA
+- Time is a **within-group** factor with two levels (5 wks, 6 mo)
+- The stastical design is called **one-way within group** ANOVA
+- Because each subject (sX) is measured $>1$ its called **repeated measures**.
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{\textbf{One-way within-groups ANOVA.} One treatment: cognitive behavior therapy (CBT) tested over time}
+    \label{tab:table1}
+    \begin{tabular}{c||c|c}
+      & \multicolumn{2}{|c }{Time}\\
+      \hline
+      Patient & 5 weeks & 6 months \\
+      \hline
+      s1 & &\\
+      s2 & &\\
+      s3 & &\\
+      s4 & &\\
+      s5 & &\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+## Two-way factorial ANOVA
+- If we were concerned with both treatment differences **and** change over time.
+- This new design allows us to look at the impact of therapy (avg'd across time), Time (avg'd across therapy), and interaction between therapy and time.
+- The first two are **main effects** and the last is an **interaction effect**.
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{\textbf{Two-way facatorial ANOVA.} Two treatment CPT and EMDR tested over time, with one between-groups and one within-groups factor}
+    \label{tab:table1}
+    \begin{tabular}{c|c||c|c}
+      & & \multicolumn{2}{|c }{Time}\\
+      \hline
+      Treatment & Patient & 5 weeks & 6 months \\
+      \hline
+      CBT & s1 & &\\
+      CBT & s2 & &\\
+      CBT & s3 & &\\
+      EMDR & s4 & &\\
+      EMDR & s5 & &\\
+      EMDR & s6 & &\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+## Two-way factorial ANOVA
+- A **factorial design** crosses $\geq2$ factors.
+- When crossing both between-group and within-groups factors, its called a **mixed-model** ANOVA.
+- So this experiment is a **Two-way factorial ANOVA**
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{\textbf{Two-way facatorial ANOVA.} Two treatment CPT and EMDR tested over time, with one between-groups and one within-groups factor}
+    \label{tab:table1}
+    \begin{tabular}{c|c||c|c}
+      & & \multicolumn{2}{|c }{Time}\\
+      \hline
+      Treatment & Patient & 5 weeks & 6 months \\
+      \hline
+      CBT & s1 & &\\
+      CBT & s2 & &\\
+      CBT & s3 & &\\
+      EMDR & s4 & &\\
+      EMDR & s5 & &\\
+      EMDR & s6 & &\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+## Testing a Two-way factorial ANOVA
+- This experiment requires 3 **F-tests**: one for Therapy, one for Time and one for Thearpy x Time interactions.
+- Recall we applied [**F-tests**](https://en.wikipedia.org/wiki/F-test) to evalute hypotheses during regression.
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{\textbf{Two-way facatorial ANOVA.} Two treatment CPT and EMDR tested over time, with one between-groups and one within-groups factor}
+    \label{tab:table1}
+    \begin{tabular}{c|c||c|c}
+      & & \multicolumn{2}{|c }{Time}\\
+      \hline
+      Treatment & Patient & 5 weeks & 6 months \\
+      \hline
+      CBT & s1 & &\\
+      CBT & s2 & &\\
+      CBT & s3 & &\\
+      EMDR & s4 & &\\
+      EMDR & s5 & &\\
+      EMDR & s6 & &\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+## Interpreting a Two-way factorial ANOVA test
+- If the therapy test is *significant* it indicates that CBT and EMDR differ in their effect on anxiety
+- A *significant* test for time indicates that axiety differed from week 5 to 6 months
+- Finally, a **significant**interaction indicates that effect on anxiety from week 5 to 6 months was different for two treatments.
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{\textbf{Two-way facatorial ANOVA.} Two treatment CPT and EMDR tested over time, with one between-groups and one within-groups factor}
+    \label{tab:table1}
+    \begin{tabular}{c|c||c|c}
+      & & \multicolumn{2}{|c }{Time}\\
+      \hline
+      Treatment & Patient & 5 weeks & 6 months \\
+      \hline
+      CBT & s1 & &\\
+      CBT & s2 & &\\
+      CBT & s3 & &\\
+      EMDR & s4 & &\\
+      EMDR & s5 & &\\
+      EMDR & s6 & &\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+## Advanced ANOVA designs
+- There are other ANOVA designs that extend this logic further.
+- For instance if you had **prior** knowledge of patients, for instance they conducted a self-test on themselves this would be a **confounding** factor or a **nuisance** parameter.
+- We could treat this **nuisance** parameter as a **covariate** and analyze this experiment using an [**analysis of covariance (ANCOVA)**](https://en.wikipedia.org/wiki/Analysis_of_covariance).
+- If you used $>1$ dependent variable in the study, to increase validity we could apply a [**multivariate analysis of variance (MANOVA)**](https://en.wikipedia.org/wiki/Multivariate_analysis_of_variance) 
+- And with covariates [**multivariate analysis of covariance (MANCOVA)**](https://en.wikipedia.org/wiki/MANCOVA).
+
+
+## Fitting an ANOVA model
+- The similarities between **ANOVA** and **regression** show that we could use `lm()` to conduct an ANOVA.
+- However, the `aov()` function has the same results and presents findings in a format relevant to ANOVA
+- The syntax of the `aov()` function is:
+```
+aov(formula, data=dataframe)
+```
+
+## R symbology
+- the $\sim$ symbol seperates the response from the explanatory variables
+$$
+y \sim A + B + C
+$$
+- the : denotes interacations between variables
+$$
+y \sim A + B + A:B
+$$
+- the * denotes complete crossing. $y \sim A*B*C$ expands to
+$$
+y \sim A + B + C + A:B + A:C + B:C + A:B:C
+$$
+- the . denotes all remaining variables. So $y \sim .$ expands to
+$$ 
+y \sim A + B + C
+$$
+
+
+## Formula for common research designs
+- One-way ANOVA
+$$
+y \sim A
+$$
+- One-way ANCOVA with 1 covariate
+$$
+y \sim x + A
+$$
+- Two-way factorial ANOVA
+$$
+y \sim A*B
+$$
+- Two-way factorial ANCOVA with 2 covariates
+$$
+y \sim x1 + x2 + A * B
+$$
+
+
+## Advanced research design formulas
+- Randomized block
+$$
+y \sim B + A(where B is a blocking factors)
+$$
+- One-way within-groups ANOVA
+$$
+y \sim A + Error(Subject/A)
+$$
+- Repeated measures ANOVA with 1 within-groups factor (W) and 1 between-groups factor (B)
+$$
+y \sim B * W + Error(Subject/A)
+$$
+
+
+## Formula order
+- Order is important under two circumstances: 1.) $>1$ factor and unbalanced design, and 2.) covariates are present.
+- Either of these conditions result in correlated factors being on the right side of the equation.
+- There are three ways approaches to partitioning variance in $y$ among the effects:
+- Type I: sequential, effects are adjusted for the ones that come earlier
+- Type II: hierarchical, effects are adjusted for other effects a lower levels
+- Type III: marginal, each effect is adjusted for other effects in the model.
+- `R` uses a Type I approach by default. SAS and SPSS use Type III by default.
+- The `car::Anova()` allows for specifying the TYPE II or III if you are matching results with SAS or SPSS
 
 
