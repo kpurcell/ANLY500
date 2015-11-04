@@ -2,17 +2,45 @@
 title: "Lecture 9"
 author: "KM Purcell"
 date: "November 3, 2015"
-output: 
-  revealjs::revealjs_presentation:
-     theme: serif
-     center: true
-     self_contained: true
-     highlight: default
+output: beamer_presentation
 ---
 
 ## Lecture 8 Wrap-up
+- Regression theory
+- Reproducible research
+- Dynamic documents
+
+
 
 # ANOVA
+
+
+## Industry example
+<!---
+This came from http://blog.hubspot.com/marketing/a-b-testing-experiments-examples
+SimCity 5, one of EA’s most popular video games, sold 1.1 million copies in the first two weeks of its launch last year. 50% of sales were digital downloads, thanks to a strong A/B testing strategy.  The test was a comparison of offering a promotional banner ad.  One variation removed the promotional offer from the page altogether. The test lead to some very surprising results: The variation with no offer messaging whatsoever drove 43.4% more purchases. Turns out people really just wanted to buy the game no extra incentive necessary.Most people believe that direct promotions drive purchases, but for EA, this turned out to be totally false. Testing gave them the information needed to maximize revenue in a way that would not have been otherwise possible.
+-->
+
+![simcity](http://cdn2.hubspot.net/hub/53/file-1739994296-jpg/Blog-Related_Images/simcity_original.jpg?t=1446588817786&width=650)
+
+
+## Application Question
+- What test would you use to compare the average conversion rate for sites with and without the promotional banner ad?
+
+>- This A/B scenario would be evaluated using a `t.test()` or some variant.
+
+
+## A/B/n
+- This is a version of scenario testing similar to A/B testing except that $>2$ scenarios are being considered.
+- The difference between A/B testing and A/B/n (MVT) testing is in the magnitude of the comparison.
+- A/B tests are used for comparing large changes or options
+- A/B/n tests are for increased subtly and for evaluating the role of interactions.
+
+
+## A/B/n --> ANOVA
+- All the talk in marketing and DevOps about MVT and A/B/n is really about ANOVA.
+- The statistical procedure of comparing "a continuous outcome on the basis of **one or more categorical predictors**".
+
 
 ## Analysis of Variance (ANOVA)
 - [analysis of variance](https://en.wikipedia.org/wiki/Analysis_of_variance) (ANOVA) is a class of [statistical model](https://en.wikipedia.org/wiki/Statistical_model) used to evaluate the source of variation based on difference between and among groups.
@@ -27,29 +55,38 @@ output:
 - a single bi-level categorical variable would be a two-sample *t-test*. 
 - A single categorical predictor with $\geq 3$ levels or $\geq 2$ categorical predictor variables with $N-$levels would be considered an *ANOVA* model.
 
-## Application Question
 
+## From Regression to ANOVA
+- In DataSci we use *regression* to predict quantitative response from quantiative predictors.
+- No reason we could not include **categorical** predictors.  However,...
 <!---
-This came from http://blog.hubspot.com/marketing/a-b-testing-experiments-examples
-SimCity 5, one of EA’s most popular video games, sold 1.1 million copies in the first two weeks of its launch last year. 50% of sales were digital downloads, thanks to a strong A/B testing strategy.  The test was a comparison of offering a promotional banner ad.  One variation removed the promotional offer from the page altogether. The test lead to some very surprising results: The variation with no offer messaging whatsoever drove 43.4% more purchases. Turns out people really just wanted to buy the game no extra incentive necessary.Most people believe that direct promotions drive purchases, but for EA, this turned out to be totally false. Testing gave them the information needed to maximize revenue in a way that would not have been otherwise possible.
+This came from R in Action, p212
 -->
-
-![simcity](http://cdn2.hubspot.net/hub/53/file-1739994296-jpg/Blog-Related_Images/simcity_original.jpg?t=1446588817786&width=650)
-
-## Application Question
-- What test would you use to compare the average conversion rate for sites with and without the promotional banner ad?
-
->- This A/B scenario would be evaluated using a `t.test()` or some variant.
+- When categorical (factors) are applied the analytical focus usually shifts from prediction to making inferences about group(factors) differences.
+- That process of **understanding group differences** is ANOVA
+- ANOVA can be used to analyze a variety of experimental and quasi-experimental designs.
 
 
-## A/B/n
-- This is a version of scenario testing similar to A/B testing except that $>2$ scenarios are being considered.
-- The difference between A/B testing and A/B/n (MVT) testing is in the magnitude of the comparison.  
-- A/B tests are used for comparing large changes or options
-- A/B/n tests are for increased subtly and for evaluating the role of interactions.
+## Experimental Design
+- Treatment is *between-groups* factor w/ 2 levels (CBT & EMDR)
+- Its *b/w groups* because patients are in one or the other treatment
+- Value for each is the *dependent* and treatment is the *independent*
 
-## A/B/n --> ANOVA
-- All the talk in marketing and DevOps about MVT and A/B/n is really about ANOVA.
-- The statistical procedure of comparing "a continuous outcome on the basis of **one or more categorical predictors**".
+\begin{table}[h!]
+  \begin{center}
+    \caption{\textbf{One-way between-groups ANOVA.} Two treatments: cognitive behavior therapy (CBT) and eye desensitization and reprocessing (EMDR)}
+    \label{tab:table1}
+    \begin{tabular}{c|c}
+      CBT & EMDR \\
+      \hline
+      s1 & s6\\
+      s2 & s7\\
+      s3 & s8\\
+      s4 & s9\\
+      s5 & s10\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
 
 
