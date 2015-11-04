@@ -1,8 +1,10 @@
 ---
-title: "Lecture 9"
+title: "Lecture 9: ANOVA"
 author: "KM Purcell"
 date: "November 3, 2015"
-output: beamer_presentation
+output: 
+    beamer_presentation
+        
 ---
 
 ## Lecture 8 Wrap-up
@@ -369,4 +371,48 @@ plotmeans(response ~ trt, xlab = "Treatment", ylab = "Response",
           main="Mean Plot with 95% CI")
 detach(cholesterol)
 ```
+
+
+## Mutliple comparisons
+- The **F-test** results:
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results="asis", comment=FALSE}
+library(xtable); options(xtable.comment = FALSE)
+xtable(anova(fit))
+```
+- Indicate a difference in the efficacy of drug treatments.
+- They do not indicate **which** treatments differ.
+- This is the purpose of **multiple comparisons**
+
+## Multiple comparisons
+```{r}
+TukeyHSD(fit)
+```
+
+
+## Multiple comparisons
+```{r, fig.width=5, fig.height=5, fig.align='center'}
+par(las=2); par(mar=c(5,8,4,2)); plot(TukeyHSD(fit))
+```
+
+
+##
+- alternative plot in the `multcomp()` package
+```{r, fig.width=5, fig.height=5, fig.align='center'}
+par(mar=c(5,4,6,2)); tuk <- glht(fit, linfct=mcp(trt="Tukey"))
+plot(cld(tuk, level=.05),col="lightgrey")
+```
+
+
+## ANOVA assumptions
+- the validity of the results of any statistical test is dependent on how well the data fits the test assumptions
+- In ANOVA the underlying assumption is that the dependent variable (response) is normally distributed and has equal variance in each group.
+- To evaluate this we use a **Q-Q plot**
+
+## Q-Q Plot
+```{r, warning=FALSE, message=FALSE, fig.width=5, fig.height=5, fig.align='center'}
+library(car)
+qq.plot(lm(response ~ trt, data=cholesterol))
+```
+
 
