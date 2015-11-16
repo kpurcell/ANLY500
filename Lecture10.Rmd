@@ -1,0 +1,28 @@
+---
+title: 'Lecture 10:'
+author: "KM Purcell"
+date: "November 15, 2015"
+output: ioslides_presentation
+---
+
+## Lecture 9 Wrap-up
+
+
+
+
+# Kruskal-Wallis Test
+
+
+# Readings & the Methods Text
+
+## Chapter 5
+
+## Chapter 6
+
+## Sandv et al. 2013
+
+## Ram 2013
+
+# Power Analysis
+
+
